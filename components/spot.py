@@ -44,6 +44,9 @@ class Spot:
         return self.color == ORANGE
     
     def is_end(self):
+        return self.color == TURQUOISE
+    
+    def is_path(self):
         return self.color == PURPLE
     
     def reset(self):
