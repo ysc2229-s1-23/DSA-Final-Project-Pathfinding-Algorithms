@@ -10,8 +10,8 @@ pygame.init() # to move to init?
 WIDTH = HEIGHT = 700
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 
-BUTTON_WIDTH, BUTTON_HEIGHT = 150, 50
-BUTTON_MARGIN = 20
+BUTTON_WIDTH, BUTTON_HEIGHT = 175, 50
+BUTTON_MARGIN = 40
 
 button_font = pygame.font.Font(None, 36)
 
@@ -21,7 +21,7 @@ buttons = {
 	"BFS": pygame.Rect(3 * BUTTON_MARGIN + 2 * BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
 }
 
-def handle_button_events():
+def handle_button_events(win, color):
 	while True:
 		for button_event in pygame.event.get():
 			if button_event.type == pygame.QUIT:
@@ -34,9 +34,9 @@ def handle_button_events():
 						return button_name
 
 		for button_name, button_rect in buttons.items():
-			pygame.draw.rect(WIN, GREY, button_rect)
+			pygame.draw.rect(win, color, button_rect)
 			button_text = button_font.render(button_name, True, BLACK)
-			WIN.blit(button_text, button_rect.center)
+			win.blit(button_text, (button_rect.x+20, button_rect.y+15))
 
 		pygame.display.flip()
 
@@ -51,14 +51,17 @@ def main(win, width, rows):
 	selected = False # flag for whether an algorithm has been selected
 
 	while run:
-		win.fill(WHITE)
+		if start == None:
+			win.fill(WHITE) # let grid be visible if only reset, not clear
 
 		## 1. Add a button to select the algorithm
 		if selected == False:
-			algorithm = handle_button_events()
+			algorithm = handle_button_events(win, GREY)
 			selected = True
-	
+
+		# once algorithm is selected, draw the grid
 		draw(win, grid, rows, width)
+
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
@@ -99,20 +102,26 @@ def main(win, width, rows):
 					### algorithm defined by user choice - TO CHANGE
 					if algorithm == "A*" or algorithm == None:
 						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-					# elif selected_algorithm == "Dijkstra":
-					# 	dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-					# elif selected_algorithm == "BFS":
-					# 	bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+					elif algorithm == "Dijkstra":
+						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+					elif algorithm == "BFS":
+						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 
 					## 6. The visualizer must stop once the start and end nodes find each other.
 					## 7. A path must be drawn from the start node to the end node once the visualizer has finished.
 					# these are both handled by code for each algorithm
 
-				### TODO: event to clear the previously found path, while retaining barriers
-				### does this mean algo selection buttons need to be visible below grid as well? 
+				## clear the previously found path, while retaining barriers
+				if event.key == pygame.K_r: # r for 'reset'
+					for row in grid:
+						for spot in row:
+							if spot.is_closed() or spot.is_open() or spot.is_path():
+								spot.reset()
+					start.make_start() # color start node again, because path reconstruction made it purple
+					selected = False
 
 				## 5. You must be able to run the visualizer again after it has finished
-				if event.key == pygame.K_c:
+				if event.key == pygame.K_c: # c for 'clear'
 					start = None
 					end = None
 					grid = make_grid(rows, width)
