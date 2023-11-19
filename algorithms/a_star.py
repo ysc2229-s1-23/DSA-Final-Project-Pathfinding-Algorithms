@@ -34,6 +34,7 @@ def a_star_algo(draw, grid, start, end):
 		if current == end:
 			reconstruct_path(came_from, end, draw)
 			end.make_end()
+			start.make_start()
 			return True
 
 		for neighbor in current.neighbors:

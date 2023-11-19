@@ -4,6 +4,7 @@ from queue import PriorityQueue
 from components.grid import *
 from components.spot import *
 from algorithms.a_star import a_star_algo
+from algorithms.dijkstra import dijkstra_algo
 
 pygame.init() # to move to init?
 
@@ -51,8 +52,9 @@ def main(win, width, rows):
 	selected = False # flag for whether an algorithm has been selected
 
 	while run:
-		if start == None:
-			win.fill(WHITE) # let grid be visible if only reset, not clear
+		if start == None: # first run or cleared
+			win.fill(WHITE)
+			draw(win, grid, rows, width)
 
 		## 1. Add a button to select the algorithm
 		if selected == False:
@@ -103,7 +105,7 @@ def main(win, width, rows):
 					if algorithm == "A*" or algorithm == None:
 						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "Dijkstra":
-						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "BFS":
 						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 
@@ -112,16 +114,15 @@ def main(win, width, rows):
 					# these are both handled by code for each algorithm
 
 				## clear the previously found path, while retaining barriers
-				if event.key == pygame.K_r: # r for 'reset'
+				elif event.key == pygame.K_r: # r for 'reset'
 					for row in grid:
 						for spot in row:
 							if spot.is_closed() or spot.is_open() or spot.is_path():
 								spot.reset()
-					start.make_start() # color start node again, because path reconstruction made it purple
 					selected = False
 
 				## 5. You must be able to run the visualizer again after it has finished
-				if event.key == pygame.K_c: # c for 'clear'
+				elif event.key == pygame.K_c: # c for 'clear'
 					start = None
 					end = None
 					grid = make_grid(rows, width)
