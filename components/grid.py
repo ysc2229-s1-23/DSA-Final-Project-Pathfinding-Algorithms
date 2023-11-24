@@ -7,6 +7,13 @@ def reconstruct_path(came_from, current, draw):
 		current.make_path()
 		draw()
 
+def reconstruct_path_fringe(came_from, current, draw):
+	while current in came_from:
+		current = came_from[current][1]
+		if current:
+			current.make_path()
+		draw()
+
 def make_grid(rows, width):
 	grid = []
 	gap = width // rows

@@ -4,6 +4,7 @@ from queue import PriorityQueue
 from components.grid import *
 from components.spot import *
 from algorithms.a_star import a_star_algo
+from algorithms.fringe import fringe_algo
 from algorithms.dijkstra import dijkstra_algo
 
 pygame.init() # to move to init?
@@ -19,7 +20,7 @@ button_font = pygame.font.Font(None, 36)
 buttons = {
 	"Dijkstra": pygame.Rect(BUTTON_MARGIN, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
 	"A*": pygame.Rect(2 * BUTTON_MARGIN + BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-	"BFS": pygame.Rect(3 * BUTTON_MARGIN + 2 * BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
+	"Fringe": pygame.Rect(3 * BUTTON_MARGIN + 2 * BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
 }
 
 def handle_button_events(win, color):
@@ -106,8 +107,8 @@ def main(win, width, rows):
 						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "Dijkstra":
 						dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-					elif algorithm == "BFS":
-						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+					elif algorithm == "Fringe":
+						fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 
 					## 6. The visualizer must stop once the start and end nodes find each other.
 					## 7. A path must be drawn from the start node to the end node once the visualizer has finished.
