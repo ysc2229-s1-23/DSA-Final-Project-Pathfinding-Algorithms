@@ -1,5 +1,6 @@
 import pygame
-from components.spot import Spot, GREY, WHITE
+from components.spot import Spot
+from components.constants import GREY, WHITE
 
 def reconstruct_path(came_from, current, draw):
 	while current in came_from:

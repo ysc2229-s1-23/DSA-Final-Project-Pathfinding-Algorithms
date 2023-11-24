@@ -3,44 +3,15 @@ import pygame
 from queue import PriorityQueue
 from components.grid import *
 from components.spot import *
+from components.button import *
+from components.constants import *
 from algorithms.a_star import a_star_algo
 from algorithms.fringe import fringe_algo
 from algorithms.dijkstra import dijkstra_algo
 
-pygame.init() # to move to init?
+pygame.init()
 
-WIDTH = HEIGHT = 700
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
-
-BUTTON_WIDTH, BUTTON_HEIGHT = 175, 50
-BUTTON_MARGIN = 40
-
-button_font = pygame.font.Font(None, 36)
-
-buttons = {
-	"Dijkstra": pygame.Rect(BUTTON_MARGIN, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-	"A*": pygame.Rect(2 * BUTTON_MARGIN + BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-	"Fringe": pygame.Rect(3 * BUTTON_MARGIN + 2 * BUTTON_WIDTH, HEIGHT - BUTTON_HEIGHT - BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-}
-
-def handle_button_events(win, color):
-	while True:
-		for button_event in pygame.event.get():
-			if button_event.type == pygame.QUIT:
-				pygame.quit()
-			elif button_event.type == pygame.MOUSEBUTTONDOWN:
-				mouse_pos = pygame.mouse.get_pos()
-
-				for button_name, button_rect in buttons.items():
-					if button_rect.collidepoint(mouse_pos):
-						return button_name
-
-		for button_name, button_rect in buttons.items():
-			pygame.draw.rect(win, color, button_rect)
-			button_text = button_font.render(button_name, True, BLACK)
-			win.blit(button_text, (button_rect.x+20, button_rect.y+15))
-
-		pygame.display.flip()
 
 def main(win, width, rows):
 	grid = make_grid(rows, width)
@@ -131,4 +102,4 @@ def main(win, width, rows):
 
 	pygame.quit()
 
-main(WIN, WIDTH, 50) # eventually let init handle this? but for now run from here
+main(WIN, WIDTH, 50)
