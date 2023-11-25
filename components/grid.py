@@ -3,12 +3,35 @@ from components.spot import Spot
 from components.constants import GREY, WHITE
 
 def reconstruct_path(came_from, current, draw):
+	"""
+	Function
+
+	Args:
+	- came_from (dict): Dictionary containing
+	- current :
+	- draw :
+
+	Returns:
+	- 
+	"""
 	while current in came_from:
 		current = came_from[current]
 		current.make_path()
 		draw()
 
 def reconstruct_path_fringe(came_from, current, draw):
+	"""
+	Function
+
+	Args:
+	- came_from (dict): 
+	- current :
+	- draw :
+
+	Returns:
+	- 
+
+	"""
 	while current in came_from:
 		current = came_from[current][1]
 		if current:
@@ -16,6 +39,9 @@ def reconstruct_path_fringe(came_from, current, draw):
 		draw()
 
 def make_grid(rows, width):
+	"""
+	
+	"""
 	grid = []
 	gap = width // rows
 	for i in range(rows):
@@ -28,6 +54,9 @@ def make_grid(rows, width):
 
 
 def draw_grid(win, rows, width):
+	"""
+	
+	"""
 	gap = width // rows
 	for i in range(rows):
 		pygame.draw.line(win, GREY, (0, i * gap), (width, i * gap))
@@ -35,6 +64,9 @@ def draw_grid(win, rows, width):
 			pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))
 
 def draw(win, grid, rows, width):
+	"""
+	
+	"""
 	win.fill(WHITE)
 
 	for row in grid:
@@ -46,6 +78,9 @@ def draw(win, grid, rows, width):
 
 
 def get_clicked_pos(pos, rows, width):
+	"""
+	
+	"""
 	gap = width // rows
 	y, x = pos
 
