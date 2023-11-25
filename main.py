@@ -43,7 +43,7 @@ def main(win, width, rows):
 
 		## 1. Add a button to select the algorithm
 		if selected == False:
-			algorithm = handle_button_events(win, RED)
+			algorithm = handle_button_events(win, BUTTON_COL)
 			selected = True
 
 		# once algorithm is selected, draw the grid
