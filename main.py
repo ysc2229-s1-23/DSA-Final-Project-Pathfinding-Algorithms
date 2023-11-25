@@ -1,4 +1,5 @@
 import pygame
+from timeit import default_timer as timer
 # import sys
 from queue import PriorityQueue
 from components.grid import *
@@ -35,6 +36,7 @@ def main(win, width, rows):
 	run = True # flag for whether an algorithm is running
 	algorithm = None # variable for user-selected algorithm
 	selected = False # flag for whether an algorithm has been selected
+	path_found = False
 
 	while run:
 		if start == None: # first run or cleared
@@ -90,15 +92,34 @@ def main(win, width, rows):
 							spot.update_neighbors(grid)
 					### algorithm defined by user choice - TO CHANGE
 					if algorithm == "A*" or algorithm == None:
-						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						start_time = timer()
+						path_found, count, path_len = a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						end_time = timer()
+						traversal_time = end_time - start_time
+
 					elif algorithm == "Dijkstra":
-						dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						start_time = timer()
+						path_found, count, path_len = dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						end_time = timer()
+						traversal_time = end_time - start_time
+
 					elif algorithm == "BFS":
-						bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						start_time = timer()
+						path_found, count, path_len = bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						end_time = timer()
+						traversal_time = end_time - start_time
+
 					elif algorithm == "Fringe":
-						fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						start_time = timer()
+						path_found, count, path_len = fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						end_time = timer()
+						traversal_time = end_time - start_time
+
 					elif algorithm == "IDA*":
-						ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						start_time = timer()
+						path_found, count, path_len = ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+						end_time = timer()
+						traversal_time = end_time - start_time
 
 					## 6. The visualizer must stop once the start and end nodes find each other.
 					## 7. A path must be drawn from the start node to the end node once the visualizer has finished.
@@ -111,6 +132,7 @@ def main(win, width, rows):
 							if spot.is_closed() or spot.is_open() or spot.is_path():
 								spot.reset()
 					selected = False
+					
 
 				## 5. You must be able to run the visualizer again after it has finished
 				elif event.key == pygame.K_c: # c for 'clear'
@@ -118,6 +140,21 @@ def main(win, width, rows):
 					end = None
 					grid = make_grid(rows, width)
 					selected = False # ensures a different algorithm can be selected
+
+		stat_font = pygame.font.Font(None, 20)
+
+		if path_found == True:
+				stats = f"Path found. Length of Path : {path_len}, Traversal Time : {traversal_time}, Nodes Traversed : {count}"
+		else:
+			stats = "Path not found."
+
+		present_stat = stat_font.render(stats, True, BLACK)
+
+		place = present_stat.get_rect(center=(WIDTH // 2, 50))
+		
+		WIN.blit(present_stat, place.topleft)
+
+		pygame.display.update()
 
 	pygame.quit()
 

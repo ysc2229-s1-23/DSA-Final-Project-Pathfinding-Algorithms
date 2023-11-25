@@ -13,12 +13,18 @@ def reconstruct_path(came_from: dict, current: Spot, draw):
 	- draw (function): A function to update the visualization.
 
 	Returns:
-	- Changes all the path nodes to PURPLE (color of path).
+	- path_len (int): Length of the path (number of nodes).
+	Changes all the path nodes to PURPLE (color of path).
 	"""
+	path_len = 0 #nedit
 	while current in came_from:
+		path_len += 1 #nedit
 		current = came_from[current]
 		current.make_path()
 		draw()
+
+	return path_len
+	
 
 def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 	"""
@@ -30,13 +36,17 @@ def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 	- draw (function): A function to update the visualization.
 
 	Returns:
-	- Changes all the path nodes to PURPLE (color of path).
+	- path_len (int): Length of the path (number of nodes).
+	Changes all the path nodes to PURPLE (color of path).
 	"""
+	path_len = 0 #nedit
 	while current in came_from:
+		path_len += 1 #nedit
 		current = came_from[current][1]
 		if current:
 			current.make_path()
 		draw()
+	return path_len
 
 def reconstruct_path_IDA(path: List[Spot], draw):
 	"""
@@ -45,11 +55,18 @@ def reconstruct_path_IDA(path: List[Spot], draw):
 	Args:
 	- path (list[Spot])
 	- draw (function): A function to update the visualization.
+
+	Returns:
+	- path_len (int): Length of the path (number of nodes).
+	Changes all the path nodes to PURPLE (color of path).
 	"""
+	path_len = 0 #nedit
 	for node in path:
+		path_len += 1 #nedit
 		if not node.is_start() and not node.is_end():
 			node.make_path()
 			draw()
+	return path_len
 
 def make_grid(rows, width):
 	"""

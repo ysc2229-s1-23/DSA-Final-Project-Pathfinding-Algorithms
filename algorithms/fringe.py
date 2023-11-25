@@ -5,6 +5,21 @@ from algorithms.a_star import h # same heuristic function
 
 
 def fringe_algo(draw, grid, start, end):
+	"""
+	Function that implements the Fringe algorithm.
+
+	Args:
+	- draw (function): A function to update the grid colors.
+	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
+	- start (Spot): The starting node to begin pathfinding.
+	- end (Spot): The ending node where the path should end.
+	
+	Returns:
+	- path_found (bool): True if a path is found, otherwise False.
+	- count (int): Number of Nodes traversed.
+	- path_len (int): Length of path. 
+	"""
+	count = 0
 	fringe = [start]
 	cache = {}
 	cache[start] = (0, None)
@@ -29,12 +44,14 @@ def fringe_algo(draw, grid, start, end):
 				continue
 			if node.is_end():
 				f_limit = f_min
-				reconstruct_path_fringe(cache, end, draw)
+				path_len = reconstruct_path_fringe(cache, end, draw)
 				end.make_end()
 				start.make_start()
-				return True
+				path_found = True #nedit
+				return path_found, count, path_len #nedit: Original was just --> True
 
 			draw()
+
 			if node != start:
 				node.make_closed()
 
@@ -51,8 +68,11 @@ def fringe_algo(draw, grid, start, end):
 				cache[child] = (g_child, node)
 
 				if not child.is_start() and not child.is_end():
+					count += 1
 					child.make_open()
 			fringe.remove(node)
 		f_limit = f_min
 
-	return False
+	path_len = None #nedit
+	path_found = False #nedit
+	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False

@@ -48,16 +48,16 @@ def search(draw: object, path: list, g: int, bound: float, end: object):
 	Recursive search function used by the IDA* algorithm.
 
 	Args:
-		draw (function): The draw function to update the grid display.
-		path (list): The list of nodes representing the path taken by the
-			search algorithm.
-		g (int): The cost of the path represented by the list of nodes.
-		bound (float): The bound on the cost of the path.
-		end (Node): The ending node.
+	- draw (function): The draw function to update the grid display.
+	- path (list): The list of nodes representing the path taken by the search algorithm.
+	- g (int): The cost of the path represented by the list of nodes.
+	- bound (float): The bound on the cost of the path.
+	- end (Node): The ending node.
+	
 	Returns:
-		True (boolean): end was reached
-		f (float): g-score + heuristic is greater than current depth (bound)
-		min_val (float): minimum value for the path
+	- True (bool): end was reached
+	- f (float): g-score + heuristic is greater than current depth (bound)
+	- min_val (float): minimum value for the path
 	"""
 	# Get last node in path
 	node = path[-1]

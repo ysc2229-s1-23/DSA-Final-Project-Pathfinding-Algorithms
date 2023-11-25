@@ -17,6 +17,10 @@ def dijkstra_algo(draw, grid, start, end):
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
 	
+	Returns:
+	- path_found (bool): True if a path is found, otherwise False.
+	- count (int): Number of Nodes traversed.
+	- path_len (int): Length of path. 
 	"""
 	distances = {spot: float("inf") for row in grid for spot in row}
 	distances[start] = 0  # Set the distance of the start vertex to zero
@@ -34,10 +38,11 @@ def dijkstra_algo(draw, grid, start, end):
 		current = priority_queue.get()[2]
 
 		if current == end:
-			reconstruct_path(came_from, end, draw)
+			path_len = reconstruct_path(came_from, end, draw)
 			end.make_end()
 			start.make_start()
-			return True
+			path_found = True #nedit
+			return path_found, count, path_len #nedit: Original was just --> True
 
 		for neighbor in current.neighbors:
 			distance = distances[current] + 1
@@ -53,4 +58,6 @@ def dijkstra_algo(draw, grid, start, end):
 		if current != start:
 			current.make_closed()
 
-	return False
+	path_len = None #nedit
+	path_found = False #nedit
+	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False

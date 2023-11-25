@@ -36,6 +36,10 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
 	
+	Returns:
+	- path_found (bool): True if a path is found, otherwise False.
+	- count (int): Number of Nodes traversed.
+	- path_len (int): Length of path. 
 	"""
 
 	count = 0
@@ -58,10 +62,11 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 		open_set_hash.remove(current)
 
 		if current == end:
-			reconstruct_path(came_from, end, draw)
+			path_len = reconstruct_path(came_from, end, draw) #nedit : made it equal to path_len
 			end.make_end()
 			start.make_start()
-			return True
+			path_found = True #nedit
+			return path_found, count, path_len #nedit: Original was just --> True
 
 		for neighbor in current.neighbors:
 			temp_g_score = g_score[current] + 1
@@ -80,5 +85,7 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 
 		if current != start:
 			current.make_closed()
-
-	return False
+	
+	path_len = None #nedit
+	path_found = False #nedit
+	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False

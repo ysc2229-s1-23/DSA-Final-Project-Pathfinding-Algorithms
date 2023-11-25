@@ -15,22 +15,26 @@ def test_h_function(p1, p2, manhattan_dist):
     assert result == manhattan_dist
 
 # @pytest.mark.parametrize(
-
-
-
-# def calculate_distance(x1, y1, x2, y2):
-#     return ((x2 - x1)**2 + (y2 - y1)**2)**0.5
-# import pytest
-# from your_code import calculate_distance
-
-# # Assume your_code.py contains the calculate_distance function
-
-# @pytest.mark.parametrize("x1, y1, x2, y2, expected_distance", [
-#     (0, 0, 3, 4, 5.0),
-#     (0, 0, 1, 1, 1.414),  # Square root of 2
-#     (0, 0, -3, -4, 5.0),  # Negative coordinates
-#     (1, 1, 1, 1, 0.0),  # Same point, distance should be 0
+# a_star_algo(draw, grid: list, start: Spot, end: Spot):
+# a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+# # GRID = 
+# @pytest.mark.parametrize("start, end, draw, expected_result", [
+#     ((0, 0), Spot(4, 4), True),  # Example case where there's a path
+#     ((0, 0), (0, 0), True),  # Case where start and end are the same (should also return True)
+#     # Add more test cases as needed
 # ])
-# def test_distance_calculation(x1, y1, x2, y2, expected_distance):
-#     result = calculate_distance(x1, y1, x2, y2)
-#     assert result == expected_distance
+
+# def test_a_star_basic(start, end, draw, expected_result):
+#     # Create a small grid for testing
+#     grid = [[Spot(row, col) for col in range(5)] for row in range(5)]
+
+#     # Set start and end positions
+#     start = grid[start_coords[0]][start_coords[1]]
+#     end = grid[end_coords[0]][end_coords[1]]
+
+#     # Run the A* algorithm
+#     result = a_star_algo(lambda: draw(WIN, GRID, 50, WIDTH), GRID, start, end)
+
+#     # Assert the result
+#     assert result == expected_result
+
