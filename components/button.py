@@ -16,11 +16,11 @@ buttons = {
 
 def handle_button_events(win, color):
 	"""
-	Function to display algorithm options on screen and return name of algorithm chosen
+	Function to display algorithm options on screen and return name of algorithm chosen.
 
 	Args:
-	- win : initialization of display screen (pygame.display.set_mode((WIDTH, WIDTH)))
-	- color (tuple): The color of the button box 
+	- win (pygame.Surface): The display screen used.
+	- color (tuple): The RGB color tuple for the button box. 
 
 	Returns:
 	- Displays buttons for each algorithm for user to select.

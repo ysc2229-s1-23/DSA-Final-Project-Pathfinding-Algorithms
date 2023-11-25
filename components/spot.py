@@ -233,18 +233,18 @@ class Spot:
         if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): # LEFT
             self.neighbors.append(grid[self.row][self.col - 1])
 
-    def __lt__(self, other): #need this?
-        """
-        Less than comparison method, not currently used.
+    # def __lt__(self, other): #need this?
+    #     """
+    #     Less than comparison method, not currently used.
 
-        Parameters
-        ----------
-        other : Spot
-            The other Spot object to compare.
+    #     Parameters
+    #     ----------
+    #     other : Spot
+    #         The other Spot object to compare.
 
-        Returns
-        -------
-        bool
-            False, as the method is not currently used for comparison.
-        """
-        return False
+    #     Returns
+    #     -------
+    #     bool
+    #         False, as the method is not currently used for comparison.
+    #     """
+    #     return False
