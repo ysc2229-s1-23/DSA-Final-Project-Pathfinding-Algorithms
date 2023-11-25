@@ -4,13 +4,15 @@
 ## Hint: You must be able to visualize the algorithm in action i.e call the methods to draw on the screen to visualize the algorithm in action in the dijkstra function
 
 import pygame
-import heapq
+from queue import PriorityQueue
 from components.grid import reconstruct_path
 
 def dijkstra_algo(draw, grid, start, end):
 	distances = {spot: float("inf") for row in grid for spot in row}
 	distances[start] = 0  # Set the distance of the start vertex to zero
-	priority_queue = [(0, start)]
+	priority_queue = PriorityQueue()
+	priority_queue.put((0, 0, start))
+	count = 0 # entry count to break ties in queue, since Spot objects incomparable
 	came_from = {}
 	# visited = set()
 
@@ -19,7 +21,7 @@ def dijkstra_algo(draw, grid, start, end):
 			if event.type == pygame.QUIT:
 				pygame.quit()
 
-		current = heapq.heappop(priority_queue)[1]
+		current = priority_queue.get()[2]
 
 		if current == end:
 			reconstruct_path(came_from, end, draw)
@@ -32,7 +34,8 @@ def dijkstra_algo(draw, grid, start, end):
 			if distance < distances[neighbor]:
 				came_from[neighbor] = current
 				distances[neighbor] = distance
-				heapq.heappush(priority_queue, (distance, neighbor))
+				count += 1
+				priority_queue.put((distance, count, neighbor))
 				neighbor.make_open()
 
 		draw()
