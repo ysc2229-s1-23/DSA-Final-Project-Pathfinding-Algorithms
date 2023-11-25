@@ -40,7 +40,7 @@ def handle_button_events(win, color):
 
 		for button_name, button_rect in buttons.items():
 			pygame.draw.rect(win, color, button_rect)
-			button_text = button_font.render(button_name, True, BLACK)
+			button_text = button_font.render(button_name, True, WHITE)
 			win.blit(button_text, (button_rect.x+45, button_rect.y+15))
 #nedit: button_rect.x used to be  + 20 not + 45 -- but perhaps find a better way to center text?
 		pygame.display.flip()

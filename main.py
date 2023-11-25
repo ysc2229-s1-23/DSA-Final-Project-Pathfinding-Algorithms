@@ -16,6 +16,17 @@ pygame.init()
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
 
 def main(win, width, rows):
+	"""
+	Main function to run the simulations.
+
+	Args:
+	- win (pygame.Surface) : Initialized display screen.
+	- width (int) : Width of the grid.
+	- rows (int) : Number of grid rows.
+
+	Returns:
+	- Runs the simulation.
+	"""
 	grid = make_grid(rows, width)
 
 	start = None
@@ -32,7 +43,7 @@ def main(win, width, rows):
 
 		## 1. Add a button to select the algorithm
 		if selected == False:
-			algorithm = handle_button_events(win, GREY)
+			algorithm = handle_button_events(win, RED)
 			selected = True
 
 		# once algorithm is selected, draw the grid

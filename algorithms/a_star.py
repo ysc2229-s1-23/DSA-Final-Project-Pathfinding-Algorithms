@@ -14,7 +14,7 @@ def h(p1, p2): # Manhattan/ taxicab distance
 	- p1 (tuple): position containing x and y coordinates
 	- p2 (tuple): position containing x and y coordinates
 
-	Output:
+	Returns:
 	- distance (float): Manhattan distance between p1 and p2
 	
 	"""
@@ -26,13 +26,13 @@ def h(p1, p2): # Manhattan/ taxicab distance
 
 def a_star_algo(draw, grid, start, end):
 	"""
-	Function that implements the A* algorithm
+	Function that implements the A* algorithm.
 
 	Args:
-	- draw :
-	- grid :
-	- start :
-	- end :
+	- draw (function): A function to update the grid colors.
+	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
+	- start (Spot): The starting node to begin pathfinding.
+	- end (Spot): The ending node where the path should end.
 	
 	"""
 
