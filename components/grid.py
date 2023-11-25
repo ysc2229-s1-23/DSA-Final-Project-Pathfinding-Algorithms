@@ -1,6 +1,7 @@
 import pygame
 from components.spot import Spot
 from components.constants import GREY, WHITE
+from typing import List
 
 def reconstruct_path(came_from: dict, current: Spot, draw):
 	"""
@@ -37,7 +38,7 @@ def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 			current.make_path()
 		draw()
 
-def reconstruct_path_IDA(path: list[Spot], draw):
+def reconstruct_path_IDA(path: List[Spot], draw):
 	"""
 	Function to visualize the shortest path. (For IDA Algo)
 
