@@ -15,6 +15,18 @@ buttons = {
 }
 
 def handle_button_events(win, color):
+	"""
+	Function to display algorithm options on screen and return name of algorithm chosen.
+
+	Args:
+	- win (pygame.Surface): The display screen used.
+	- color (tuple): The RGB color tuple for the button box. 
+
+	Returns:
+	- button_name (str) : Name of algorithm selected to run. 
+
+	Displays buttons for each algorithm for user to select.
+	"""
 	while True:
 		for button_event in pygame.event.get():
 			if button_event.type == pygame.QUIT:
@@ -29,6 +41,6 @@ def handle_button_events(win, color):
 		for button_name, button_rect in buttons.items():
 			pygame.draw.rect(win, color, button_rect)
 			button_text = button_font.render(button_name, True, BLACK)
-			win.blit(button_text, (button_rect.x+20, button_rect.y+15))
-
+			win.blit(button_text, (button_rect.x+45, button_rect.y+15))
+#nedit: button_rect.x used to be  + 20 not + 45 -- but perhaps find a better way to center text?
 		pygame.display.flip()

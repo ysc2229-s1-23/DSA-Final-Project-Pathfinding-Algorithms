@@ -7,11 +7,35 @@ from queue import PriorityQueue
 from components.grid import reconstruct_path
 
 def h(p1, p2): # Manhattan/ taxicab distance
+	"""
+	Helper function to calculate the Manhattan/taxicab distance
+
+	Args:
+	- p1 (tuple): position containing x and y coordinates
+	- p2 (tuple): position containing x and y coordinates
+
+	Output:
+	- distance (float): Manhattan distance between p1 and p2
+	
+	"""
 	x1, y1 = p1.get_pos()
 	x2, y2 = p2.get_pos()
-	return abs(x1 - x2) + abs(y1 - y2)
+
+	distance = abs(x1 - x2) + abs(y1 - y2)
+	return distance
 
 def a_star_algo(draw, grid, start, end):
+	"""
+	Function that implements the A* algorithm
+
+	Args:
+	- draw :
+	- grid :
+	- start :
+	- end :
+	
+	"""
+
 	count = 0
 	open_set = PriorityQueue()
 	open_set.put((0, count, start))

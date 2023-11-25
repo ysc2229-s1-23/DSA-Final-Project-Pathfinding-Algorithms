@@ -26,8 +26,7 @@ To start the application, simply run `main.py`.
 3. **Fringe Search**: 
 
 
-
-
+Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
 
 In your README.md, include:
 

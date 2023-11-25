@@ -27,7 +27,7 @@ def main(win, width, rows):
 
 	while run:
 		if start == None: # first run or cleared
-			win.fill(WHITE)
+			win.fill(WHITE) #nedit: is this redundant bc win.fill(WHITE) also in draw function
 			draw(win, grid, rows, width)
 
 		## 1. Add a button to select the algorithm
@@ -36,7 +36,7 @@ def main(win, width, rows):
 			selected = True
 
 		# once algorithm is selected, draw the grid
-		draw(win, grid, rows, width)
+		draw(win, grid, rows, width) #nedit: shld this be indented if it's draw grid when selected algo
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -59,12 +59,14 @@ def main(win, width, rows):
 				elif spot != end and spot != start:
 					spot.make_barrier()
 
-			## 4. You must be able to reset the grid
+			## 4. You must be able to reset the grid #nedit: maybe can add button to reset everything?  
+
+			# #nedit: this is retracting clicks but not necessarily resetting whole grid?
 			elif pygame.mouse.get_pressed()[2]: # RIGHT click
 				pos = pygame.mouse.get_pos()
 				row, col = get_clicked_pos(pos, rows, width)
 				spot = grid[row][col]
-				spot.reset()
+				spot.reset() #reset method in Spot class changing node back to white
 				if spot == start:
 					start = None
 				elif spot == end:
