@@ -165,10 +165,8 @@ class Spot:
         """
         Checks if the node is part of the path.
 
-        Returns
-        -------
-        bool
-            True if the node is part of the path, False otherwise.
+        Returns:
+        - (bool): True if the node is part of the path, False otherwise.
         """
         return self.color == PURPLE
     

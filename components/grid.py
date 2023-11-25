@@ -4,15 +4,15 @@ from components.constants import GREY, WHITE
 
 def reconstruct_path(came_from, current, draw):
 	"""
-	Function
+	Function to visualize the shortest path.
 
 	Args:
-	- came_from (dict): Dictionary containing
-	- current :
-	- draw :
+	- came_from (dict): Dictionary containing the nodes of the shortest path.
+	- current (Spot): Node to begin constructing the path from.
+	- draw (function): A function to update the visualization.
 
 	Returns:
-	- 
+	- Changes all the path nodes to PURPLE (color of path).
 	"""
 	while current in came_from:
 		current = came_from[current]
@@ -21,16 +21,15 @@ def reconstruct_path(came_from, current, draw):
 
 def reconstruct_path_fringe(came_from, current, draw):
 	"""
-	Function
+	Function to visualize the shortest path. (For Fringe Algo)
 
 	Args:
-	- came_from (dict): 
-	- current :
-	- draw :
+	- came_from (dict): Dictionary containing the nodes of the shortest path.
+	- current (Spot): Node to begin constructing the path from.
+	- draw (function): A function to update the visualization.
 
 	Returns:
-	- 
-
+	- Changes all the path nodes to PURPLE (color of path).
 	"""
 	while current in came_from:
 		current = came_from[current][1]
@@ -40,7 +39,14 @@ def reconstruct_path_fringe(came_from, current, draw):
 
 def make_grid(rows, width):
 	"""
-	
+	Function to create a grid for display.
+
+	Args:
+	- rows (int): Number of grid rows.
+	- width (int): Width of the grid.
+
+	Returns:
+	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
 	"""
 	grid = []
 	gap = width // rows
@@ -55,7 +61,17 @@ def make_grid(rows, width):
 
 def draw_grid(win, rows, width):
 	"""
+	Function to draw grid lines on the display grid.
+
+	Args:
+	- win (pygame.Surface): The display grid to draw on.
+	- rows (int): Number of grid rows.
+	- width (int): Width of the grid.
+
+	Returns:
+	- None
 	
+	Draws appropriately spaced grid lines on the grid to distinguish each node.
 	"""
 	gap = width // rows
 	for i in range(rows):
@@ -65,13 +81,22 @@ def draw_grid(win, rows, width):
 
 def draw(win, grid, rows, width):
 	"""
-	
+	Function that updates the grid noting the colors of selected nodes.
+
+	Args:
+	- win (pygame.Surface): The display grid to draw on.
+	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
+	- rows (int): Number of grid rows.
+	- width (int): Width of the grid.
+
+	Returns:
+	- None
 	"""
 	win.fill(WHITE)
 
 	for row in grid:
 		for spot in row:
-			spot.draw(win)
+			spot.draw(win) #draws the node on the grid.
 
 	draw_grid(win, rows, width)
 	pygame.display.update()
@@ -79,6 +104,16 @@ def draw(win, grid, rows, width):
 
 def get_clicked_pos(pos, rows, width):
 	"""
+	Function to obtain the row and column numbers of a node on the grid.
+
+	Args:
+	- pos (tuple) : Tuple containing the y and x coordinates of the position.
+	- rows (int): Number of grid rows.
+	- width (int): Width of the grid.
+
+	Returns:
+	- row (int): Row number of node.
+	- col (int): Column number of node.
 	
 	"""
 	gap = width // rows

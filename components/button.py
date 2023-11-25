@@ -23,8 +23,9 @@ def handle_button_events(win, color):
 	- color (tuple): The RGB color tuple for the button box. 
 
 	Returns:
-	- Displays buttons for each algorithm for user to select.
 	- button_name (str) : Name of algorithm selected to run. 
+
+	Displays buttons for each algorithm for user to select.
 	"""
 	while True:
 		for button_event in pygame.event.get():
