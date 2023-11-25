@@ -2,7 +2,7 @@ import pygame
 from components.spot import Spot
 from components.constants import GREY, WHITE
 
-def reconstruct_path(came_from, current, draw):
+def reconstruct_path(came_from: dict, current: Spot, draw):
 	"""
 	Function to visualize the shortest path.
 
@@ -19,7 +19,7 @@ def reconstruct_path(came_from, current, draw):
 		current.make_path()
 		draw()
 
-def reconstruct_path_fringe(came_from, current, draw):
+def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 	"""
 	Function to visualize the shortest path. (For Fringe Algo)
 
@@ -37,7 +37,14 @@ def reconstruct_path_fringe(came_from, current, draw):
 			current.make_path()
 		draw()
 
-def reconstruct_path_IDA(path, draw):
+def reconstruct_path_IDA(path: list[Spot], draw):
+	"""
+	Function to visualize the shortest path. (For IDA Algo)
+
+	Args:
+	- path (list[Spot])
+	- draw (function): A function to update the visualization.
+	"""
 	for node in path:
 		if not node.is_start() and not node.is_end():
 			node.make_path()
