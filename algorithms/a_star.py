@@ -3,16 +3,18 @@
 ## Hint: You must be able to reconstruct the path once the algorithm has finished
 ## Hint: You must be able to visualize the algorithm in action i.e call the methods to draw on the screen to visualize the algorithm in action in the astar function
 import pygame
+# import typing
 from queue import PriorityQueue
 from components.grid import reconstruct_path
+from components.spot import Spot
 
-def h(p1, p2): # Manhattan/ taxicab distance
+def h(p1: Spot, p2: Spot): # Manhattan/ taxicab distance
 	"""
 	Helper function to calculate the Manhattan/taxicab distance
 
 	Args:
-	- p1 (tuple): position containing x and y coordinates
-	- p2 (tuple): position containing x and y coordinates
+	- p1 (Spot): First Node 
+	- p2 (Spot): Second Node
 
 	Returns:
 	- distance (float): Manhattan distance between p1 and p2
@@ -24,7 +26,7 @@ def h(p1, p2): # Manhattan/ taxicab distance
 	distance = abs(x1 - x2) + abs(y1 - y2)
 	return distance
 
-def a_star_algo(draw, grid, start, end):
+def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 	"""
 	Function that implements the A* algorithm.
 
