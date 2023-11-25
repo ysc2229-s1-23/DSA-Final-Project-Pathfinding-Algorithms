@@ -8,6 +8,9 @@ Description of Algorithms Implemented:
 2. A* Algorithm
 
 
+3. Fringe Algorithm
+
+
 3. Breadth-First Search
 
 
@@ -16,7 +19,7 @@ Description of Algorithms Implemented:
 
 Instructions on code execution:
 
-
+Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
 
 
 In your README.md, include:
