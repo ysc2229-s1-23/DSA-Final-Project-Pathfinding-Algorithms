@@ -8,6 +8,16 @@ from queue import PriorityQueue
 from components.grid import reconstruct_path
 
 def dijkstra_algo(draw, grid, start, end):
+	"""
+	Function that implements the Dijkstra algorithm.
+
+	Args:
+	- draw (function): A function to update the grid colors.
+	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
+	- start (Spot): The starting node to begin pathfinding.
+	- end (Spot): The ending node where the path should end.
+	
+	"""
 	distances = {spot: float("inf") for row in grid for spot in row}
 	distances[start] = 0  # Set the distance of the start vertex to zero
 	priority_queue = PriorityQueue()
