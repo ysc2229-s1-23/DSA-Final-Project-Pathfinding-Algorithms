@@ -1,14 +1,13 @@
-# see https://en.wikipedia.org/wiki/Fringe_search pseudocode
+# see https://en.wikipedia.org/wiki/Fringe_search
 import pygame
 from components.grid import reconstruct_path_fringe
 from algorithms.a_star import h # same heuristic function
 
 
 def fringe_algo(draw, grid, start, end):
-    fringe = []
+    fringe = [start]
     cache = {}
     cache[start] = (0, None)
-    fringe.append(start)
     f_limit = h(start, end)
 
     while fringe:
@@ -29,6 +28,7 @@ def fringe_algo(draw, grid, start, end):
                 f_min = min(f, f_min)
                 continue
             if node.is_end():
+                f_limit = f_min
                 reconstruct_path_fringe(cache, end, draw)
                 end.make_end()
                 start.make_start()
@@ -38,17 +38,17 @@ def fringe_algo(draw, grid, start, end):
             if node != start:
                 node.make_closed()
 
-            for child in node.neighbors:
-                g_child = g + 1
+            for child in reversed(node.neighbors):
+                g_child = g + h(child, start)
                 # If the child node has already been seen
-                if child in cache:
-                    g_cached, _ = cache[child]
+                if child in cache and cache[child]!=None:
+                    g_cached = cache[child][0]
                     if g_child >= g_cached:
                         continue
 
                 if child in fringe:
                     fringe.remove(child)
-                fringe.append(child)
+                fringe.insert(fringe.index(node), child)
                 cache[child] = (g_child, node)
 
                 if not child.is_start() and not child.is_end():

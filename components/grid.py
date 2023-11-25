@@ -15,6 +15,12 @@ def reconstruct_path_fringe(came_from, current, draw):
 			current.make_path()
 		draw()
 
+def reconstruct_path_IDA(path, draw):
+	for node in path:
+		if not node.is_start() and not node.is_end():
+			node.make_path()
+			draw()
+
 def make_grid(rows, width):
 	grid = []
 	gap = width // rows
