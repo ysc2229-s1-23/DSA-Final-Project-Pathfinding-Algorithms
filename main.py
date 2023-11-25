@@ -7,6 +7,8 @@ from components.button import *
 from components.constants import *
 from algorithms.a_star import a_star_algo
 from algorithms.fringe import fringe_algo
+from algorithms.IDa_star import ida_star_algo
+from algorithms.bfs import bfs_algo
 from algorithms.dijkstra import dijkstra_algo
 
 pygame.init()
@@ -80,8 +82,12 @@ def main(win, width, rows):
 						a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "Dijkstra":
 						dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+					elif algorithm == "BFS":
+						bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "Fringe":
 						fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
+					elif algorithm == "IDA*":
+						ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 
 					## 6. The visualizer must stop once the start and end nodes find each other.
 					## 7. A path must be drawn from the start node to the end node once the visualizer has finished.
