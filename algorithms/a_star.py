@@ -8,7 +8,7 @@ from components.grid import reconstruct_path
 
 def h(p1, p2): # Manhattan/ taxicab distance
 	"""
-	Function to calculate the Manhattan/taxicab distance
+	Helper function to calculate the Manhattan/taxicab distance
 
 	Args:
 	- p1 (tuple): position containing x and y coordinates

@@ -17,6 +17,9 @@ class Spot:
         self.width = width
         self.total_rows = total_rows
 
+        #nedit
+        self.path_count = 0
+
     def get_pos(self):
         return self.row, self.col
     
@@ -58,6 +61,9 @@ class Spot:
 
     def make_path(self):
         self.color = PURPLE
+        
+        #nedit
+        self.path_count += 1
 
     def draw(self, win):
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
