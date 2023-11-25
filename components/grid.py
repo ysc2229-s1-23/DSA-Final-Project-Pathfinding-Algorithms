@@ -81,7 +81,7 @@ def draw_grid(win, rows, width):
 
 def draw(win, grid, rows, width):
 	"""
-	Function that updates the grid noting the colors of selected nodes.
+	Function that updates the grid noting the colors of nodes.
 
 	Args:
 	- win (pygame.Surface): The display grid to draw on.
@@ -96,7 +96,7 @@ def draw(win, grid, rows, width):
 
 	for row in grid:
 		for spot in row:
-			spot.draw(win) #draws the node on the grid.
+			spot.draw(win) #draws the node color on the grid.
 
 	draw_grid(win, rows, width)
 	pygame.display.update()

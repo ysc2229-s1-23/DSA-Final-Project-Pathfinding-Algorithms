@@ -200,12 +200,10 @@ class Spot:
 
     def draw(self, win):
         """
-        Draws the node on the window.
+        Draws the node (including its color) on the window.
 
-        Parameters
-        ------
-        win : pygame.Surface
-            The window surface on which to draw the node.
+        Args:
+        - win (pygame.Surface): The window surface on which to draw the node.
         """
         pygame.draw.rect(win, self.color, (self.x, self.y, self.width, self.width))
 
