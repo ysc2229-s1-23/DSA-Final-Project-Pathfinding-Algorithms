@@ -9,6 +9,7 @@ For this project, we considered a path on the grid from the start node to the en
 - Each square on the path is vertically or horizontally contiguous (i.e. diagonal movements are not allowed).
 - No other path between the start and end nodes is strictly longer than the path.
 
+
 ## How to run
 Prerequisites: pygame.
 
@@ -19,6 +20,10 @@ To start the application, simply run `main.py`.
   - Green squares represent nodes which are to be visited 'next', in the context of the algorithm. Red squares represent nodes which have already been visited. The final path found by the algorithm is reconstructed in purple.
 - To reset the path and choose a different algorithm while keeping the start, end, and barriers, press `R`.
 - To clear everything on the grid and select an algorithm again, press `C`.
+
+## How it will look like
+
+After setting up the nodes in desired fashion and pressing 'SPACE', the algorithm will run. Once a path has been visualized or determined to not exist, pathfinding statistics will be displayed at the top of the screen. These statistics can include whether a shortest path has been found, the time taken to find the path, the number of nodes traversed, and the length of the path found. 
 
 ## Algorithms Implemented
 1. **Dijkstra Algorithm**: a single-source shortest-path algorithm which, in its most general form, works on digraphs with unbounded non-negative weights.
