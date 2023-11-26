@@ -115,7 +115,7 @@ def fringe_algo(draw, grid, start, end):
 
 				if not child.is_start() and not child.is_end():
 					count += 1
-					child.make_open()
+					child.make_closed()
 
 			fringe.remove(node)  # mark as closed
 
