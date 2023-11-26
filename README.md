@@ -59,8 +59,8 @@ We faced some challenges implementing Fringe Search (and attempting to implement
 
 ### Visualisation
 Some challenges we faced include some bugs in clearing the screen which we managed to fix: 
-- parts of the purple path were still there on the screen when we added more barriers after running it once and reran with the spacebar. 
-- pathfinding statistics for previous run lingered even after we changed to a new algorithm and only changed when finding the next new path.
+- Parts of the purple path were still there on the screen when we added more barriers after running it once and reran with the spacebar. 
+- Pathfinding statistics for previous run lingered even after we changed to a new algorithm and only changed when finding the next new path. Now it refreshes correctly.
 
 
 ### Implementing algorithms
@@ -76,7 +76,7 @@ When experimenting with different features and trying to generate functions, we 
 
 We spent a lot of time debugging code, especially when trying to do the UI and testing, because we had to think about how to separate the pygame elements from the actual algorithm. The tests also helped to identify problems in algorithm code (like termination) which we were able to solve. Definitely a challenging but worthwhile experience!
 
-## Notable Project Folders/Files
+## Description of Project Folders/Files
 
 algorithms (FOLDER)
 - a_star.py: Code for A* algorithm.
@@ -102,8 +102,8 @@ tests (FOLDER)
 - a_star_test.py: Test Cases for A* Algorithm using grid examples from hold_val.py.
 - bfs_test.py: Test Cases for BFS Algorithm using grid examples from hold_val.py.
 - dijkstra_test.py: Test Cases for Dijkstra Algorithm using grid examples from hold_val.py.
-- fringe_test.py: Test Cases for Fringe Algorithm (only simple tests due to slight error in code)
-- integration_test.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path)
+- fringe_test.py: Test Cases for Fringe Algorithm using grid examples from hold_val.py.
+- integration_test.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path).
 
 main.py (FILE) --> Run this file to activate the pygame visualizer
 
