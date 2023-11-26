@@ -4,7 +4,7 @@ from components.constants import *
 pygame.init()
 
 BUTTON_WIDTH, BUTTON_HEIGHT = 175, 50
-BUTTON_MARGIN = 60
+BUTTON_MARGIN = 80
 
 button_font = pygame.font.Font(None, 36)
 title_font = pygame.font.Font(None, 64)
@@ -33,8 +33,6 @@ instruction_box = pygame.Rect(INSTRUCTION_BOX_X, INSTRUCTION_BOX_Y, INSTRUCTION_
 instruction_font = pygame.font.Font(None, 24)
 instruction_text = (
     "\n"
-	"\n"
-	"\n"
 	"Choose an algorithm\n"
 	"\n"
     "1st click is start node\n"
