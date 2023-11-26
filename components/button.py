@@ -1,6 +1,8 @@
 import pygame
 from components.constants import *
 
+"-----DISPLAY SETTINGS ------"
+
 pygame.init()
 
 BUTTON_WIDTH, BUTTON_HEIGHT = 175, 50
@@ -9,19 +11,12 @@ BUTTON_MARGIN = 80
 button_font = pygame.font.Font(None, 36)
 title_font = pygame.font.Font(None, 64)
 
-# buttons = {
-#     "Dijkstra": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-#     "A*": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + BUTTON_HEIGHT + BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
-#     "BFS": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 2 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT),
-#     "Fringe": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 3 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT),
-#     "IDA": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 4 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT),
-# }
+#Dictionary to Hold Button Positions
 buttons = {
     "Dijkstra": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 60, BUTTON_WIDTH, BUTTON_HEIGHT),
     "A*": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 60 + BUTTON_HEIGHT + BUTTON_MARGIN, BUTTON_WIDTH, BUTTON_HEIGHT),
     "BFS": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 60 + 2 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT),
     "Fringe": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 60 + 3 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT)
-    # "IDA": pygame.Rect(BUTTON_MARGIN, BUTTON_MARGIN + 60 + 4 * (BUTTON_HEIGHT + BUTTON_MARGIN), BUTTON_WIDTH, BUTTON_HEIGHT),
 }
 
 INSTRUCTION_BOX_WIDTH = 250
@@ -51,15 +46,10 @@ instruction_text = (
 	"\n"
 	"Have fun! :)"
 )
+
+"function to create instruction box at the start of the visualizer"
 def draw_instruction_box(win):
-	# """
-	# Function to create 
 
-	# Args:
-	# - win
-
-
-	# """
     pygame.draw.rect(win, WHITE, instruction_box, border_radius=20)
     
     lines = instruction_text.split('\n')
@@ -69,6 +59,7 @@ def draw_instruction_box(win):
         line_rect = line_text.get_rect(midleft=(instruction_box.x + 20, y_offset))
         win.blit(line_text, line_rect.topleft)
         y_offset += line_rect.height + 5 
+
 
 def handle_button_events(win, color):
 	"""
@@ -92,8 +83,6 @@ def handle_button_events(win, color):
 				for button_name, button_rect in buttons.items():
 					if button_rect.collidepoint(mouse_pos):
 						return button_name
-		
-		# win.fill(BLACK) #clear screen before redrawing button???
 
 		title_text = title_font.render("Choose Pathfinding Algorithm", True, BLACK)
         

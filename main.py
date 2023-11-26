@@ -8,7 +8,7 @@ from components.button import *
 from components.constants import *
 from algorithms.a_star import a_star_algo
 from algorithms.fringe import fringe_algo
-from algorithms.IDa_star import ida_star_algo
+from algorithms.ripcode import ida_star_algo
 from algorithms.bfs import bfs_algo
 from algorithms.dijkstra import dijkstra_algo
 

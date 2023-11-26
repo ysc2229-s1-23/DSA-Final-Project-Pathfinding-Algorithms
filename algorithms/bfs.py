@@ -3,6 +3,8 @@ from components.grid import reconstruct_path
 from collections import deque
 from components.spot import Spot
 
+'-----CODE FOR BFS ALGORITHM------'
+
 def bfs_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
 	Function that implements the BFS algorithm.

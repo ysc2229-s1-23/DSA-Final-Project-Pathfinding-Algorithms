@@ -1,10 +1,7 @@
 import pygame
 from components.constants import *
 
-# TODO:
-    ## Implement the class of one node in the grid
-    ## Remember to add the necessary attributes and methods
-    ## Hint: You must be able to update the neighbors of a node
+"---Defining a Node with Spot Class----"
 
 class Spot:
     """
@@ -86,11 +83,6 @@ class Spot:
     
     update_neighbors(self, grid)
         Stores the valid neighbours of the node.
-
-    __lt__(self, other)
-        Less than comparison method.
-
-
     """
     def __init__(self, row, col, width, total_rows):
         self.row = row
@@ -228,19 +220,3 @@ class Spot:
 
         if self.col > 0 and not grid[self.row][self.col - 1].is_barrier(): # LEFT
             self.neighbors.append(grid[self.row][self.col - 1])
-
-    # def __lt__(self, other): #need this?
-    #     """
-    #     Less than comparison method, not currently used.
-
-    #     Parameters
-    #     ----------
-    #     other : Spot
-    #         The other Spot object to compare.
-
-    #     Returns
-    #     -------
-    #     bool
-    #         False, as the method is not currently used for comparison.
-    #     """
-    #     return False

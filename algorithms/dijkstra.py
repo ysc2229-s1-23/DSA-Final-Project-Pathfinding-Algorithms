@@ -1,12 +1,9 @@
-#TODO: Implement the dijkstra algorithm
-
-## Hint: You must be able to reconstruct the path once the algorithm has finished
-## Hint: You must be able to visualize the algorithm in action i.e call the methods to draw on the screen to visualize the algorithm in action in the dijkstra function
-
 import pygame
 from queue import PriorityQueue
 from components.grid import reconstruct_path
 from components.spot import Spot
+
+"-----CODE FOR DIJKSTRA ALGORITHM------"
 
 def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
@@ -39,13 +36,16 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 					pygame.quit()
 
 		current = priority_queue.get()[2]
+		print(type(current))
 
 		if current == end:
 			path_len = reconstruct_path(came_from, end, draw)
 			end.make_end()
 			start.make_start()
 			path_found = True #nedit
+			print(count, path_len)
 			return path_found, count, path_len #nedit: Original was just --> True
+		
 
 		for neighbor in current.neighbors:
 			distance = distances[current] + 1
@@ -64,4 +64,5 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 
 	path_len = None #nedit
 	path_found = False #nedit
+	
 	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False

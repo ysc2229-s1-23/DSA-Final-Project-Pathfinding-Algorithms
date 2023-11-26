@@ -3,6 +3,8 @@ from components.spot import Spot
 from components.constants import GREY, WHITE
 from typing import List
 
+"------HELPER FUNCTIONS--------"
+
 def reconstruct_path(came_from: dict, current: Spot, draw):
 	"""
 	Function to visualize the shortest path.
@@ -63,9 +65,9 @@ def reconstruct_path_IDA(path: List[Spot], draw):
 	- path_len (int): Length of the path (number of nodes).
 	Changes all the path nodes to PURPLE (color of path).
 	"""
-	path_len = 0 #nedit
+	path_len = 0 
 	for node in path:
-		path_len += 1 #nedit
+		path_len += 1 
 		if not node.is_start() and not node.is_end():
 			node.make_path()
 			draw()
@@ -157,16 +159,3 @@ def get_clicked_pos(pos, rows, width):
 	col = x // gap
 
 	return row, col
-
-# class Grid:
-    
-#     # TODO:
-
-#     ## Implement the class of the grid
-#     ## You must be able to create a grid 
-#     ## You must be able to draw the grid
-#     ## You must be able to reset the grid
-#     ## You must be able to click on the nodes of the grid
-#     ## You must also need to implement a method to update the neighbors of each node which builds on top of the previous TODO
-    
-#     pass 

@@ -1,16 +1,11 @@
-# TODO: Implement A* algorithm
-
-## Hint: You must be able to reconstruct the path once the algorithm has finished
-## Hint: You must be able to visualize the algorithm in action i.e call the methods to draw on the screen to visualize the algorithm in action in the astar function
 import pygame
-# import typing
 from queue import PriorityQueue
 from components.grid import reconstruct_path
 from components.spot import Spot
 import dill as pickle
-
 import sys
 
+"-----CODE FOR A* ALGORITHM------"
 sys.setrecursionlimit(100000)
 
 def h(p1: Spot, p2: Spot): # Manhattan/ taxicab distance
@@ -48,14 +43,6 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	- path_len (int): Length of path. 
 	"""
 
-	# db = {}
-	# db["grid"] = grid
-	# db["start"] = start
-	# db["end"] = end
-	# print(db)
-	# with open('complex2case', 'wb') as file:
-	# 	pickle.dump(db, file)
-
 	count = 0
 	open_set = PriorityQueue()
 	open_set.put((0, count, start))
@@ -78,12 +65,11 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 		open_set_hash.remove(current)
 
 		if current == end:
-			path_len = reconstruct_path(came_from, end, draw) #nedit : made it equal to path_len
+			path_len = reconstruct_path(came_from, end, draw) 
 			end.make_end()
 			start.make_start()
-			path_found = True #nedit
-			# print(f_score)
-			return path_found, count, path_len #nedit: Original was just --> True
+			path_found = True 
+			return path_found, count, path_len 
 
 		for neighbor in current.neighbors:
 			temp_g_score = g_score[current] + 1
@@ -103,14 +89,6 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 		if current != start:
 			current.make_closed()
 	
-	path_len = None #nedit
-	path_found = False #nedit
-	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False
-
-# with open("simplecase", 'rb') as file:
-#     db = pickle.load(file)
-#     simple_grid = db["grid"]
-#     simple_start = db["start"]
-#     simple_end = db["end"]
-
-# a_star_algo(None, simple_grid, simple_start, simple_end, True)
+	path_len = None 
+	path_found = False 
+	return path_found, count, path_len 

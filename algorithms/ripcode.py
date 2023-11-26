@@ -3,6 +3,19 @@ from components.grid import reconstruct_path_IDA
 from algorithms.a_star import h # same heuristic function
 from queue import PriorityQueue
 
+
+"-----MEMORIAL: NOT USED OR FAILED FUNCTIONS-------"
+
+#code temporarily put in algorithm function to save grid configurations (found in test_grids folder).
+# db = {}
+# db["grid"] = grid
+# db["start"] = start
+# db["end"] = end
+# print(db)
+# with open('complex2case', 'wb') as file:
+# 	pickle.dump(db, file)
+
+#Incomplete IDA* Function
 def ida_star_algo(draw, grid, start, end):
 	"""
 	Implements the IDA* search algorithm.

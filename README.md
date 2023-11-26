@@ -9,7 +9,6 @@ For this project, we considered a path on the grid from the start node to the en
 - Each square on the path is vertically or horizontally contiguous (i.e. diagonal movements are not allowed).
 - No other path between the start and end nodes is strictly longer than the path.
 
-
 ## How to run
 Prerequisites: pygame.
 
@@ -75,13 +74,41 @@ When experimenting with different features and trying to generate functions, we 
 
 We spent a lot of time debugging code, especially when trying to do the UI and testing, because we had to think about how to separate the pygame elements from the actual algorithm. Definitely a challenging but worthwhile experience!
 
+## Notable Project Folders/Files
 
-In your README.md, include:
+algorithms (FOLDER)
+- a_star.py: Code for A* algorithm.
+- bfs.py: Code for BFS algorithm.
+- dijkstra.py: Code for Dijkstra algorithm.
+- fringe.py: Code for Fringe algorithm.
+- ripcode.py: Functions that were used temporarily and other implementations that require more work such as the IDA* algorithm.
 
-Descriptions of algorithms implemented.
-Encountered issues or challenges.
-Instructions on code execution.
+components (FOLDER)
+- button.py: Contains code for display features such as the buttons and title at the home page.
+- constants.py: Defines variables like color to maintain consistency and readability throughout the project.
+- grid.py: Contains key helper functions like draw() and reconstruct_path() that are used in algorithm code and main.py.
+- spot.py: Contains 'Spot' Class which each node in the grid is defined by. 
 
-[If applicable] Methodology and findings from the bonus challenge of beating Python’s built-in algorithms.
+test_grids (FOLDER)
+- hold_val.py : Extracts grid examples from the dictionary files in the test_grids folder.
+- nopath : Contains dictionary of grid configuration with no viable path.
+- onepath : Contains dictionary of grid configuration with one clear shortest path.
+- simplecase : Contains dictionary of regular grid configuration.
+- complexcase : Contains dictionary of regular grid configuration.
+- complex2case : Contains dictionary of regular grid configuration.
 
-Any extra information you would like to share with me.
+tests (FOLDER)
+- a_star_test.py: Test Cases for A* Algorithm using grid examples from hold_val.py.
+- bfs_test.py: Test Cases for BFS Algorithm using grid examples from hold_val.py.
+- dijkstra_test.py: Test Cases for Dijkstra Algorithm using grid examples from hold_val.py.
+- fringe_test.py: Test Cases for Fringe Algorithm (only simple tests due to slight error in code)
+- integration.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path)
+
+
+main.py (FILE) --> Run this file to activate the pygame visualizer
+
+
+## Acknowledgements
+
+- Thanks to Prof EJ our DSA professor, and Nihal, our peer tutor, for input and guidance.
+- Code was adapted from A* Pathfinding Visualization Tutorial by Tech With Tim : https://www.youtube.com/watch?v=JtiK0DOeI4A

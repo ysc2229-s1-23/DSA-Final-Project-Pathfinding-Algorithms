@@ -4,6 +4,7 @@ from components.grid import reconstruct_path_fringe
 from algorithms.a_star import h # same heuristic function
 from components.spot import Spot
 
+"-----CODE FOR FRINGE ALGORITHM------"
 
 def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
@@ -14,6 +15,7 @@ def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
+	- test (bool): If function used for testing, test should be True. Otherwise, False.
 	
 	Returns:
 	- path_found (bool): True if a path is found, otherwise False.

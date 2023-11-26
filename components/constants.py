@@ -1,6 +1,9 @@
+"----UNIVERSAL CONSTANTS----"
+
+# Grid Scale
 WIDTH = HEIGHT = 700
 
-# colors
+# Colors
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 255, 0)

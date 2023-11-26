@@ -3,46 +3,17 @@ from components.constants import WIDTH
 from algorithms.dijkstra import dijkstra_algo
 from components.spot import Spot
 import dill as pickle 
+from test_grids.hold_val import no_end, no_grid, no_start, one_end, one_grid, one_start, simple_end, simple_grid, simple_start, simple_end, complex2_end, complex2_grid, complex2_start, complex_end, complex_grid, complex_start
 
-#SAMPLE GRIDS
-# grid with no shortest path:
-with open("test_grids/nopath", 'rb') as file:
-    db = pickle.load(file)
-    no_grid = db["grid"]
-    no_start = db["start"]
-    no_end = db["end"]
-
-# grid with one shortest path:
-with open("test_grids/onepath", 'rb') as file:
-    db = pickle.load(file)
-    one_grid = db["grid"]
-    one_start = db["start"]
-    one_end = db["end"]
-
-# simple test grid:
-with open("test_grids/simplecase", 'rb') as file:
-    db = pickle.load(file)
-    simple_grid = db["grid"]
-    simple_start = db["start"]
-    simple_end = db["end"]
-
-# complex test grid:
-with open("test_grids/complexcase", 'rb') as file:
-    db = pickle.load(file)
-    complex_grid = db["grid"]
-    complex_start = db["start"]
-    complex_end = db["end"]
-
-# complex2 test grid:
-with open("test_grids/complex2case", 'rb') as file:
-    db = pickle.load(file)
-    complex2_grid = db["grid"]
-    complex2_start = db["start"]
-    complex2_end = db["end"]
 
 @pytest.mark.parametrize("grid, start, end, path_found, nodes_traversed, path_len", [
+    #Edge Case
     (no_grid, no_start, no_end, False, 0, None),
+
+    #One Shortest Path
     (one_grid, one_start, one_end, True, 49, 16),
+
+    #Other Test Cases
     (simple_grid, simple_start, simple_end, True, 87, 21),
     (complex_grid, complex_start, complex_end, True, 349, 41),
     (complex2_grid, complex2_start, complex2_end, True, 629, 18)

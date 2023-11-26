@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "final-project"
 version = "0.1.0"
-description = ""
-authors = ["You Guang <yokurang@gmail.com>"]
+description = "DSA Final Project"
+authors = ["Michelle Ong, Nicole Lai"]
 readme = "README.md"
 packages = [{include = "final_project"}]
 
