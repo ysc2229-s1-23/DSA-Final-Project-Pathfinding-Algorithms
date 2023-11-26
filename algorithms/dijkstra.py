@@ -6,8 +6,9 @@
 import pygame
 from queue import PriorityQueue
 from components.grid import reconstruct_path
+from components.spot import Spot
 
-def dijkstra_algo(draw, grid, start, end):
+def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
 	Function that implements the Dijkstra algorithm.
 
@@ -31,9 +32,10 @@ def dijkstra_algo(draw, grid, start, end):
 	# visited = set()
 
 	while priority_queue:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
+		if test == False:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
 
 		current = priority_queue.get()[2]
 
@@ -52,8 +54,9 @@ def dijkstra_algo(draw, grid, start, end):
 				count += 1
 				priority_queue.put((distance, count, neighbor))
 				neighbor.make_open()
-
-		draw()
+		
+		if test == False:
+			draw()
 
 		if current != start:
 			current.make_closed()

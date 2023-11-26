@@ -25,6 +25,54 @@ def fringe_algo(draw, grid, start, end):
 	cache[start] = (0, None)
 	f_limit = h(start, end)
 
+	# while fringe:
+	# 	for event in pygame.event.get():
+	# 		if event.type == pygame.QUIT:
+	# 			pygame.quit()
+
+	# 	f_min = float("inf")
+
+	# 	for node in fringe:
+	# 		g, _ = cache[node]
+
+	# 		# Get f-score for current node
+	# 		f = g + h(node, end)
+
+	# 		# Check if the f-score is greater than the allowed limit
+	# 		if f > f_limit:
+	# 			f_min = min(f, f_min)
+	# 			continue
+	# 		if node.is_end():
+	# 			f_limit = f_min
+	# 			path_len = reconstruct_path_fringe(cache, end, draw)
+	# 			end.make_end()
+	# 			start.make_start()
+	# 			path_found = True #nedit
+	# 			return path_found, count, path_len #nedit: Original was just --> True
+
+	# 		draw()
+
+	# 		if node != start:
+	# 			node.make_closed()
+
+	# 		for child in node.neighbors:
+	# 			g_child = g + 1
+	# 			# If the child node has already been seen
+	# 			if child in cache and cache[child]!=None:
+	# 				if g_child >= cache[child][0]:
+	# 					continue
+
+	# 			if child in fringe:
+	# 				fringe.remove(child)
+	# 			fringe.insert(fringe.index(node)+1, child)
+	# 			cache[child] = (g_child, node)
+
+	# 			if not child.is_start() and not child.is_end():
+	# 				count += 1
+	# 				child.make_open()
+	# 		fringe.remove(node)
+	# 	f_limit = f_min
+	# ...
 	while fringe:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -34,21 +82,19 @@ def fringe_algo(draw, grid, start, end):
 
 		for node in fringe:
 			g, _ = cache[node]
-
-			# Get f-score for current node
 			f = g + h(node, end)
 
-			# Check if the f-score is greater than the allowed limit
 			if f > f_limit:
 				f_min = min(f, f_min)
 				continue
+
 			if node.is_end():
 				f_limit = f_min
 				path_len = reconstruct_path_fringe(cache, end, draw)
 				end.make_end()
 				start.make_start()
-				path_found = True #nedit
-				return path_found, count, path_len #nedit: Original was just --> True
+				path_found = True
+				return path_found, count, path_len
 
 			draw()
 
@@ -57,20 +103,22 @@ def fringe_algo(draw, grid, start, end):
 
 			for child in node.neighbors:
 				g_child = g + 1
-				# If the child node has already been seen
-				if child in cache and cache[child]!=None:
+
+				if child in cache and cache[child] is not None:
 					if g_child >= cache[child][0]:
 						continue
 
-				if child in fringe:
-					fringe.remove(child)
-				fringe.insert(fringe.index(node)+1, child)
+				if child not in fringe:
+					fringe.append(child)
+
 				cache[child] = (g_child, node)
 
 				if not child.is_start() and not child.is_end():
 					count += 1
 					child.make_open()
-			fringe.remove(node)
+
+			fringe.remove(node)  # mark as closed
+
 		f_limit = f_min
 
 	path_len = None #nedit

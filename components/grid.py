@@ -21,7 +21,9 @@ def reconstruct_path(came_from: dict, current: Spot, draw):
 		path_len += 1 #nedit
 		current = came_from[current]
 		current.make_path()
-		draw()
+		if draw != None:
+			draw()
+		# draw()
 
 	return path_len
 	
@@ -41,11 +43,12 @@ def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 	"""
 	path_len = 0 #nedit
 	while current in came_from:
-		path_len += 1 #nedit
 		current = came_from[current][1]
 		if current:
 			current.make_path()
-		draw()
+			path_len += 1 #nedit
+		if draw != None:
+			draw()
 	return path_len
 
 def reconstruct_path_IDA(path: List[Spot], draw):

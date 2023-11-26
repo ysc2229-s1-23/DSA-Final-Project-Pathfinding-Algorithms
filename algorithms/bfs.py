@@ -1,8 +1,9 @@
 import pygame
 from components.grid import reconstruct_path
 from collections import deque
+from components.spot import Spot
 
-def bfs_algo(draw, grid, start, end):
+def bfs_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
 	Function that implements the BFS algorithm.
 
@@ -11,6 +12,7 @@ def bfs_algo(draw, grid, start, end):
 	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
+	- test (bool): If function used for testing, test should be True. Otherwise, False.
 	
 	Returns:
 	- path_found (bool): True if a path is found, otherwise False.
@@ -23,9 +25,10 @@ def bfs_algo(draw, grid, start, end):
 	visited = set([start])
 
 	while queue:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
+		if test == False:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
 
 		current = queue.popleft()
 
@@ -43,8 +46,8 @@ def bfs_algo(draw, grid, start, end):
 				came_from[neighbor] = current
 				queue.append(neighbor)
 				neighbor.make_open()
-
-		draw()
+		if test == False:
+			draw()
 
 		if current != start:
 			current.make_closed()

@@ -1,105 +1,78 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/jugTuFiY)
-# Graph Algorithm Visualizer
+# DSA Final Project Report: Graph Algorithm Visualizer
+Group Members: Michelle Ong, Nicole Lai
 
-## Description
+This project aims to implement and visualise several graph algorithms.
+In particular, the algorithms implemented are pathfinding algorithms, i.e. given a start and end node in the graph, we want to find the shortest path from the start to the end node.
+This is sometimes known as the single-pair shortest path problem.
 
-Develop a visualization tool for graph traversal algorithms, focusing on Dijkstra and A* algorithms, utilizing Python and Pygame.
+For this project, we considered a path on the grid from the start node to the end node to be a valid shortest path if it satisfied the following:
+- Each square on the path is vertically or horizontally contiguous (i.e. diagonal movements are not allowed).
+- No other path between the start and end nodes is strictly longer than the path.
 
-## Project Structure
+## How to run
+Prerequisites: pygame.
 
-- **algorithms**
-  - `dijkstra.py`: Implementation of Dijkstra's algorithm.
-  - `a_star.py`: Implementation of A* algorithm for pathfinding.
-- **components**
-  - `spot.py`: Definition and management of a spot/node in the grid.
-  - `grid.py`: Handling grid functionality, drawings, and updates.
-- **assets**
-  - `demo.mov`: A demonstration video providing an example of expected outcomes.
-- **main.py**: Main script to execute the application.
-- **pyproject.toml**: Configuration file for Poetry, outlining project dependencies.
+To start the application, simply run `main.py`.
+- You may select any of the three algorithms to visualise by clicking on the buttons.
+- Left click on the grid to add the start position (orange), end position (turquoise), and barriers (black). Right click to remove any of these.
+- Once you are satisfied with the setup, press `SPACE` to start the algorithm visualisation.
+  - Green squares represent nodes which are to be visited 'next', in the context of the algorithm. Red squares represent nodes which have already been visited. The final path found by the algorithm is reconstructed in purple.
+- To reset the path and choose a different algorithm while keeping the start, end, and barriers, press `R`.
+- To clear everything on the grid and select an algorithm again, press `C`.
 
-## Prerequisites
+## Algorithms Implemented
+1. **Dijkstra Algorithm**: a single-source shortest-path algorithm which, in its most general form, works on digraphs with unbounded non-negative weights.
+   It is the fastest known algorithm for such arbitrary graphs, but for special cases (e.g. integer weights, undirected graphs, or additional information is available as we allow here in the form of the heuristic function), other algorithms can have better time complexity.
+   It maintains a set of vertices whose shortest distance from the source is known, and iteratively selects the vertex with the smallest known distance, updating the distances of its neighbors.
+   The next vertex to be visited is determined by a priority queue, which sorts the neighbors of visited vertices by their currently recorded distance.
+   - Time Complexity: $O((|V| + |E|) \log(|V|))$. The $\log(|V|)$ factor comes from the use of a priority queue to efficiently select the node with the smallest distance.
+   - Space Complexity: $O(|V|)$ from the priority queue in the worst case (all vertices in the queue).
 
-- **Python** (3.x recommended)
-- **Poetry**
-- **Pygame**
+2. **A\* Algorithm**: a single-pair shortest-path algorithm which builds on Dijkstra's algorithm, but also incorporates a heuristic function $h(n)$ which helps to narrow down the search space, or at least to prioritise those paths which are most likely to lead to shorter paths. 
+   We chose the Manhattan distance as the heuristic function, due to our definition of a valid shortest path (diagonal movements not allowed).
+   - Time Complexity: $O(|E|\log(|V|))$. Like Dijkstra's, the $\log(|V|)$ factor is due to the use of a priority queue. However, A* performs better because of its heuristic.
+   - Space Complexity: also $O(|V|)$ due to the priority queue.
 
-To install dependencies, utilize Poetry:
-```bash
-poetry add pygame
-```
+3. **Breadth-First Search**: BFS is a special case of Dijkstra's algorithm, in which the priority queue is replaced by a simple queue.
+   This can be done because the grid can be thought of as an unweighted graph: any two paths which go through the same number of squares are considered essentially the same.
+   That is, the cost for moving from one node to any of its neighbors incurs the same cost.
+   - Time Complexity: $O(|V| + |E|)$. In the case of a grid where each cell has a constant number of neighbors, the time complexity simplifies to $O(|V|)$.
+   - Space Complexity: also $O(|V|)$ due to the queue.
 
-Ensure the virtual environment is active when running the project.
+4. **Fringe Search**: an algorithm which aims to strike a balance between the space/time trade-off of A\* and Iterative Deepening A\* (IDA\*) for pathfinding on grid-based maps. The key motivation is to eliminate problems with repeated states/cycles and reduce the overhead of iterative deepening in IDA\*.
+   The algorithm maintains two lists, "now" and "later," representing the current iteration and the next iteration respectively; this is implemented as a single concatenated list in our code, following the pseudocode provided by the authors of the [paper](https://web.archive.org/web/20090219220415/http://www.cs.ualberta.ca/~games/pathfind/publications/cig2005.pdf) introducing the algorithm.
+   It iterates over the fringe (frontier) of the search tree, expanding nodes based on their costs.
 
-## Requirements
+   Compared to A\*, Fringe Search does not require the now list to be kept in sorted order, which may reduce time cost.
+   However, Fringe Search may visit nodes that are irrelevant for the current iteration and A\*’s ordering means that it is more likely to find a goal state sooner than the Fringe Search.
+   The relative costs of these differences determines which of A\* and Fringe Search performs better in specific problems.
 
-### Core Features
+Note: the first three of these algorithms are guaranteed to always find the shortest path, and all have the same space complexity. However, there are clear differences in time complexity, and this becomes apparent in the visualisations.
 
-- Implement and visualize **Dijkstra and A* algorithms** using Pygame.
-- **Path Tracing**: Implement a smooth animation to trace the final path.
-- Allow users to:
-  - Define **start** and **end** nodes.
-  - **Draw barriers** and **clear** them.
-  - **Select** an algorithm to execute.
-  - **Reset** the grid or **clear** the previously found path, while retaining barriers. Ensure that the algorithm can be run again after clearing the path.
-- Ensure the pathfinding algorithm **terminates once the start node finds the end node**.
+We faced some challenges implementing Fringe Search (and attempting to implement IDA\*), which we will address in the next section.
 
-Please check out the demonstration video for a better understanding of the core features in the assets folder.
+## Challenges
+### Visualisation
+Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
 
-### [Optional] Additional Features (For Groups of 2 or 3)
+### Implementing algorithms
+While our implementation of Dijkstra's, A\* and BFS passed all our tests and managed to find the shortest path every time, we faced challenges implementing both IDA\* and Fringe Search.
+We ended up discarding IDA\* as we did not have time to fix the implementation.
 
-- Implement **one (groups of 2) or two (groups of 3)** additional graph traversal algorithms.
-- Display pathfinding statistics. They must at least include:
-  - Time taken to traverse.
-  - How many nodes were traversed (space complexity).
-  - One or two additional statistics of your choice. The more the merrier. Be creative!
+Although the Fringe Search algorithm was generally faster than Dijkstra's or BFS, it often did not find the shortest path (off by 1-10 nodes), and was about as fast as A\* in many cases.
+It is very possible that we misunderstood something in the pseudocode and/or the paper while implementing the algorithm.
 
-Note these features are a must if you are in a group of 2 or 3. If you are a solo participant, you can implement these features for extra points.
-
-### Bonus: Beat Python’s Built-in (10% Extra Points)
-
-Outperform Python's built-in graph traversal in terms of time complexity using one of your implemented algorithms. Ensure relevant comparisons (e.g., Dijkstra with Dijkstra). Document your results, methodology, and findings in your README.md. It is also important to mention why your implementation is able to outperform (or not) the built-in traversal. Bonus points can carry over to other assignments, such as the midterm. Of course, if you produce very impressive results, you may be rewarded with more than 10% extra points and might consider writing a paper about it. You can be creative with your methodology, but ensure that it is valid and reproducible. Include unit tests and screenshots of your results.
-
-### Note
-
-Feel free to modify the given template code according to your project needs.
-
-## Grading Rubric
-
-1. **Algorithm Implementation and Visualization**: 50% (65% for solo participants)
-   - Effective implementation and visualization of **Dijkstra and A* algorithms**.
-2. **Code Quality and User Interaction**: 15%
-   - Maintain code quality and ensure intuitive user interactions.
-   - Modular code with proper documentation.
-   - If you want more methodology points, please make sure your code is properly organized and documented so that I can understand your methodology. If not properly documented, I will not be able to understand your methodology and will not be able to give you points.
-3. **Testing and Validation**: 20%
-   - Validate the algorithm’s correctness and efficiency through testing.
-4. [Optional] **Pathfinding Statistics**: 5% (for groups only)
-   - Time taken to traverse.
-   - How many nodes were traversed (space complexity).
-   - One or two additional statistics of your choice. The more the merrier. Be creative!
-5. [Optional] **Additional Algorithm(s) Implementation**: 10% (for groups only)
-   - Implement two more graph traversal algorithms at least.
+### Others
+When experimenting with different features and trying to generate functions, we faced an issue of computer crashing, presumably because of ineffici
 
 
-## Submission
+In your README.md, include:
 
-Ensure to push your final code to your designated repository before the deadline.
+Descriptions of algorithms implemented.
+Encountered issues or challenges.
+Instructions on code execution.
 
-Wishing you the best of luck, and happy coding!
+[If applicable] Methodology and findings from the bonus challenge of beating Python’s built-in algorithms.
 
-## Your README
-
-In your ```README.md```, include:
-- Descriptions of algorithms implemented.
-- Encountered issues or challenges.
-- Instructions on code execution.
-- [If applicable] Methodology and findings from the bonus challenge of beating Python’s built-in algorithms.
-- Any extra information you would like to share with me.
-- **List the names of all group members, or your own name if you are a solo participant.**
-
-### Tutorial
-
-For further guidance on implementing pathfinding algorithms, consider watching the following tutorial: [Coding Train A* Algorithm Tutorial](https://www.youtube.com/watch?v=JtiK0DOeI4A). This resource may provide additional insights or methods for executing pathfinding algorithms in visual formats.
-
-**Note:** Plagiarism of code from this tutorial will result in a grade of 0 for this assignment. Please ensure that you are not copying code from this tutorial, and that you are implementing the algorithms yourself.
+Any extra information you would like to share with me.
+List the names of all group members, or your own name if you are a solo participant.

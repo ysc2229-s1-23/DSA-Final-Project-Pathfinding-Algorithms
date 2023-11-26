@@ -7,6 +7,11 @@ import pygame
 from queue import PriorityQueue
 from components.grid import reconstruct_path
 from components.spot import Spot
+import dill as pickle
+
+import sys
+
+sys.setrecursionlimit(100000)
 
 def h(p1: Spot, p2: Spot): # Manhattan/ taxicab distance
 	"""
@@ -26,7 +31,7 @@ def h(p1: Spot, p2: Spot): # Manhattan/ taxicab distance
 	distance = abs(x1 - x2) + abs(y1 - y2)
 	return distance
 
-def a_star_algo(draw, grid: list, start: Spot, end: Spot):
+def a_star_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
 	Function that implements the A* algorithm.
 
@@ -35,12 +40,21 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
+	- test (bool): If function used for testing, test should be True. Otherwise, False.
 	
 	Returns:
 	- path_found (bool): True if a path is found, otherwise False.
 	- count (int): Number of Nodes traversed.
 	- path_len (int): Length of path. 
 	"""
+
+	# db = {}
+	# db["grid"] = grid
+	# db["start"] = start
+	# db["end"] = end
+	# print(db)
+	# with open('complex2case', 'wb') as file:
+	# 	pickle.dump(db, file)
 
 	count = 0
 	open_set = PriorityQueue()
@@ -54,9 +68,11 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 	open_set_hash = {start}
 
 	while not open_set.empty():
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
+		if test == False:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
+
 
 		current = open_set.get()[2]
 		open_set_hash.remove(current)
@@ -66,6 +82,7 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 			end.make_end()
 			start.make_start()
 			path_found = True #nedit
+			# print(f_score)
 			return path_found, count, path_len #nedit: Original was just --> True
 
 		for neighbor in current.neighbors:
@@ -80,8 +97,8 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 					open_set.put((f_score[neighbor], count, neighbor))
 					open_set_hash.add(neighbor)
 					neighbor.make_open()
-
-		draw()
+		if draw != None:
+			draw()
 
 		if current != start:
 			current.make_closed()
@@ -89,3 +106,11 @@ def a_star_algo(draw, grid: list, start: Spot, end: Spot):
 	path_len = None #nedit
 	path_found = False #nedit
 	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False
+
+# with open("simplecase", 'rb') as file:
+#     db = pickle.load(file)
+#     simple_grid = db["grid"]
+#     simple_start = db["start"]
+#     simple_end = db["end"]
+
+# a_star_algo(None, simple_grid, simple_start, simple_end, True)

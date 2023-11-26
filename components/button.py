@@ -47,13 +47,21 @@ instruction_text = (
 	"\n"
 	"Press spacebar to find path\n"
 	"\n"
-	"Press 'r' to keep same nodes\n"
+	"Press 'R' to keep same nodes\n"
 	"\n"
-	"Press 'c' to clear everything\n"
+	"Press 'C' to clear everything\n"
 	"\n"
 	"Have fun! :)"
 )
 def draw_instruction_box(win):
+	# """
+	# Function to create 
+
+	# Args:
+	# - win
+
+
+	# """
     pygame.draw.rect(win, WHITE, instruction_box, border_radius=20)
     
     lines = instruction_text.split('\n')
