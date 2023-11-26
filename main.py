@@ -12,6 +12,8 @@ from algorithms.ripcode import ida_star_algo
 from algorithms.bfs import bfs_algo
 from algorithms.dijkstra import dijkstra_algo
 
+'----MAIN FUNCTION TO RUN VISUALIZER------'
+
 pygame.init()
 
 WIN = pygame.display.set_mode((WIDTH, WIDTH))
@@ -36,31 +38,26 @@ def main(win, width, rows):
 	run = True # flag for whether an algorithm is running
 	algorithm = None # variable for user-selected algorithm
 	selected = False # flag for whether an algorithm has been selected
-	
+	display = False #flag to avoid flickering
 	
 	stat_font = pygame.font.Font(None, 20)
 	present_stat = stat_font.render("", True, BLACK) 
-	# buffer = pygame.display.set_mode((WIDTH, WIDTH))
-	
 
-	update_stats = True
 	while run:
 		path_found = None #somehow this is impt for the thing to not pop off....
 		
-		if start == None: # first run or cleared
+		if not display:
+		# if start == None: # first run or cleared
 			win.fill(WHITE) #nedit: is this redundant bc win.fill(WHITE) also in draw function
 			draw(win, grid, rows, width)
-			# buffer.fill(WHITE)
-			# draw(buffer, grid, rows, width)
-		## 1. Add a button to select the algorithm
+
+		## Button to select the algorithm
 		if selected == False:
 			algorithm = handle_button_events(win, BUTTON_COL)
-			# algorithm = handle_button_events(buffer, BUTTON_COL) #nedit
 			selected = True
 
 		# once algorithm is selected, draw the grid
-		draw(win, grid, rows, width) #nedit: shld this be indented if it's draw grid when selected algo
-		# draw(buffer, grid, rows, width) #nedit
+		draw(win, grid, rows, width) 
 
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -83,9 +80,7 @@ def main(win, width, rows):
 				elif spot != end and spot != start:
 					spot.make_barrier()
 
-			## 4. You must be able to reset the grid #nedit: maybe can add button to reset everything?  
-
-			# #nedit: this is retracting clicks but not necessarily resetting whole grid?
+			## 4. You must be able to reset the grid 
 			elif pygame.mouse.get_pressed()[2]: # RIGHT click
 				pos = pygame.mouse.get_pos()
 				row, col = get_clicked_pos(pos, rows, width)
@@ -101,43 +96,31 @@ def main(win, width, rows):
 					for row in grid:
 						for spot in row:
 							spot.update_neighbors(grid)
-					### algorithm defined by user choice - TO CHANGE
+
+					
+					start_time = timer()
+
+					### algorithm defined by user choice 
 					if algorithm == "A*" or algorithm == None:
-						start_time = timer()
 						path_found, count, path_len = a_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-						end_time = timer()
-						traversal_time = end_time - start_time
-
 					elif algorithm == "Dijkstra":
-						start_time = timer()
 						path_found, count, path_len = dijkstra_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-						end_time = timer()
-						traversal_time = end_time - start_time
-
 					elif algorithm == "BFS":
-						start_time = timer()
 						path_found, count, path_len = bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-						end_time = timer()
-						traversal_time = end_time - start_time
-
-					elif algorithm == "Fringe":
-						start_time = timer()
+					elif algorithm == "Fringe":						
 						path_found, count, path_len = fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-						end_time = timer()
-						traversal_time = end_time - start_time
+					elif algorithm == "IDA*":						
+						path_found, count, path_len = ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)						
+					
+					end_time = timer()
+					traversal_time = end_time - start_time
 
-					elif algorithm == "IDA*":
-						start_time = timer()
-						path_found, count, path_len = ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-						end_time = timer()
-						traversal_time = end_time - start_time
-
-					# stat_font = pygame.font.Font(None, 20)
 					if path_found == None:
 						continue
 					else:
+						display = True
 						if path_found == True:
-								stats = f"Path found. Length of Path : {path_len}, Traversal Time : {traversal_time}, Nodes Traversed : {count}"
+							stats = f"Path found. Length of Path : {path_len}, Traversal Time : {traversal_time}, Nodes Traversed : {count}"
 						elif path_found == False:
 							stats = "Path not found."
 
@@ -148,33 +131,28 @@ def main(win, width, rows):
 
 				## clear the previously found path, while retaining barriers
 				elif event.key == pygame.K_r: # r for 'reset'
-					# start_spot = start
-					# end_spot = end
+					display = False
 					path_found = None
-					# grid = make_grid(rows, width)
-					# start_spot.make_start()
-					# end_spot.make_end()
-
+			
 					for row in grid:
 						for spot in row:
 							if spot.is_closed() or spot.is_open() or spot.is_path():
 								spot.reset()
 					selected = False
 
-
 				## 5. You must be able to run the visualizer again after it has finished
 				elif event.key == pygame.K_c: # c for 'clear'
+					display = False
 					start = None
 					end = None
 					path_found = None
 					grid = make_grid(rows, width)
 					selected = False # ensures a different algorithm can be selected
 		
-		place = present_stat.get_rect(center=(WIDTH // 2, 50))
-		# buffer.blit(present_stat, place.topleft)
-		WIN.blit(present_stat, place.topleft)
-		# WIN.blit(buffer, (0, 0))
-		pygame.display.update()
+		if display:
+			place = present_stat.get_rect(center=(WIDTH // 2, 50))
+			WIN.blit(present_stat, place.topleft)
+			pygame.display.update()
 
 	pygame.quit()
 
