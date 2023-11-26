@@ -2,26 +2,12 @@ import pytest
 from components.constants import WIDTH
 from algorithms.fringe import fringe_algo
 from components.spot import Spot
-import dill as pickle 
+from test_grids.hold_val import no_end, no_grid, no_start, complex_end, complex_grid, complex_start
 
-#SAMPLE GRIDS (contains dictionary of particular grid configuration.)
-# grid with no shortest path:
-with open("test_grids/nopath", 'rb') as file:
-    db = pickle.load(file)
-    no_grid = db["grid"]
-    no_start = db["start"]
-    no_end = db["end"]
-
-# grid with one shortest path:
-with open("test_grids/onepath", 'rb') as file:
-    db = pickle.load(file)
-    one_grid = db["grid"]
-    one_start = db["start"]
-    one_end = db["end"]
 
 @pytest.mark.parametrize("grid, start, end, path_found, nodes_traversed, path_len", [
-    (no_grid, no_start, no_end, False, 0, None)#,
-    # (one_grid, one_start, one_end, True, 42, 16),
+    (no_grid, no_start, no_end, False, 0, None),
+    (complex_grid, complex_start, complex_end, True, 627, 41) #case where fringe actually finds the shortest path.
 ])
 
 def test_fringe_function(grid, start, end, path_found, nodes_traversed, path_len):
