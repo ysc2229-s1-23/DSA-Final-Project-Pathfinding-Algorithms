@@ -74,7 +74,7 @@ It is very possible that we misunderstood something in the pseudocode and/or the
 ### Others
 When experimenting with different features and trying to generate functions, we faced an issue of computer crashing, presumably because of computational overload and some personal computer issue. This greatly slowed down our progress in experimenting with code. 
 
-We spent a lot of time debugging code, especially when trying to do the UI and testing, because we had to think about how to separate the pygame elements from the actual algorithm. Definitely a challenging but worthwhile experience!
+We spent a lot of time debugging code, especially when trying to do the UI and testing, because we had to think about how to separate the pygame elements from the actual algorithm. The tests also helped to identify problems in algorithm code (like termination) which we were able to solve. Definitely a challenging but worthwhile experience!
 
 ## Notable Project Folders/Files
 
