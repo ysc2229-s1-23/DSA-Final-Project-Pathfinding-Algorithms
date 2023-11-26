@@ -17,12 +17,14 @@ from test_grids.hold_val import no_end, no_grid, no_start, one_end, one_grid, on
 def test_integration_function(grid, start, end, path_found, speed, path_len):
     a_star_path, a_star_count, a_star_len = a_star_algo(None, grid, start, end, True)
     bfs_path, bfs_count, bfs_len = bfs_algo(None, grid, start, end, True)
-    dijkstra_path, dijkstra_count, dijkstra_len = bfs_algo(None, grid, start, end, True)
+    dijkstra_path, dijkstra_count, dijkstra_len = dijkstra_algo(None, grid, start, end, True)
 
     path_found_for_all = a_star_path and bfs_path and dijkstra_path
 
-    count_relation = (a_star_count < bfs_count and a_star_count < dijkstra_count) #case studies where A* is faster
+    #case study where A* is faster, will be False if all the same
+    count_relation = (a_star_count < bfs_count and a_star_count < dijkstra_count) 
 
+    #checking if shortest path is the same length. cross-checking with each other. 
     if a_star_len == None and bfs_len == None and dijkstra_len == None:
         same_len = True
     elif a_star_len == bfs_len and bfs_len == dijkstra_len:

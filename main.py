@@ -1,6 +1,5 @@
 import pygame
 from timeit import default_timer as timer
-# import sys
 from queue import PriorityQueue
 from components.grid import *
 from components.spot import *
@@ -8,7 +7,7 @@ from components.button import *
 from components.constants import *
 from algorithms.a_star import a_star_algo
 from algorithms.fringe import fringe_algo
-from algorithms.ripcode import ida_star_algo
+from ripcode import ida_star_algo
 from algorithms.bfs import bfs_algo
 from algorithms.dijkstra import dijkstra_algo
 
@@ -97,7 +96,6 @@ def main(win, width, rows):
 						for spot in row:
 							spot.update_neighbors(grid)
 
-					
 					start_time = timer()
 
 					### algorithm defined by user choice 

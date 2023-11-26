@@ -1,7 +1,7 @@
 import pygame
-from components.grid import reconstruct_path_IDA
 from algorithms.a_star import h # same heuristic function
 from queue import PriorityQueue
+from components.spot import Spot
 
 
 "-----MEMORIAL: NOT USED OR FAILED FUNCTIONS-------"
@@ -15,7 +15,27 @@ from queue import PriorityQueue
 # with open('complex2case', 'wb') as file:
 # 	pickle.dump(db, file)
 
-#Incomplete IDA* Function
+#Incomplete IDA* Functions
+def reconstruct_path_IDA(path: list[Spot], draw):
+	"""
+	Function to visualize the shortest path. (For IDA Algo)
+
+	Args:
+	- path (list[Spot])
+	- draw (function): A function to update the visualization.
+
+	Returns:
+	- path_len (int): Length of the path (number of nodes).
+	Changes all the path nodes to PURPLE (color of path).
+	"""
+	path_len = 0 
+	for node in path:
+		path_len += 1 
+		if not node.is_start() and not node.is_end():
+			node.make_path()
+			draw()
+	return path_len
+
 def ida_star_algo(draw, grid, start, end):
 	"""
 	Implements the IDA* search algorithm.

@@ -102,10 +102,8 @@ class Spot:
         """
         Checks if the node is closed.
 
-        Returns
-        -------
-        bool
-            True if the node is closed, False otherwise.
+        Returns:
+        - bool: True if the node is closed, False otherwise.
         """
         return self.color == RED
     
@@ -113,10 +111,8 @@ class Spot:
         """
         Checks if the node is open.
 
-        Returns
-        -------
-        bool
-            True if the node is open, False otherwise.
+        Returns:
+        - bool: True if the node is open, False otherwise.
         """
         return self.color == GREEN
     
@@ -124,10 +120,8 @@ class Spot:
         """
         Checks if the node is a barrier.
 
-        Returns
-        -------
-        bool
-            True if the node is a barrier, False otherwise.
+        Returns:
+        - bool: True if the node is a barrier, False otherwise.
         """
         return self.color == BLACK
     
@@ -135,10 +129,8 @@ class Spot:
         """
         Checks if the node is the start node.
 
-        Returns
-        -------
-        bool
-            True if the node is the start node, False otherwise.
+        Returns:
+        - bool: True if the node is the start node, False otherwise.
         """
         return self.color == ORANGE
     
@@ -146,10 +138,8 @@ class Spot:
         """
         Checks if the node is the end node.
 
-        Returns
-        -------
-        bool
-            True if the node is the end node, False otherwise.
+        Returns:
+        - bool: True if the node is the end node, False otherwise.
         """
         return self.color == TURQUOISE
     
@@ -158,7 +148,7 @@ class Spot:
         Checks if the node is part of the path.
 
         Returns:
-        - (bool): True if the node is part of the path, False otherwise.
+        - bool: True if the node is part of the path, False otherwise.
         """
         return self.color == PURPLE
     
@@ -203,10 +193,8 @@ class Spot:
         """
         Stores the valid neighbors of the node.
 
-        Parameters
-        ----------
-        grid : list
-            The grid containing the nodes.
+        Args:
+        - grid (list): The grid containing the nodes.
         """
         self.neighbors = []
         if self.row < self.total_rows - 1 and not grid[self.row + 1][self.col].is_barrier(): # DOWN

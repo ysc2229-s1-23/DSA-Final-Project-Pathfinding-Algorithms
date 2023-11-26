@@ -53,26 +53,6 @@ def reconstruct_path_fringe(came_from: dict, current: Spot, draw):
 			draw()
 	return path_len
 
-def reconstruct_path_IDA(path: List[Spot], draw):
-	"""
-	Function to visualize the shortest path. (For IDA Algo)
-
-	Args:
-	- path (list[Spot])
-	- draw (function): A function to update the visualization.
-
-	Returns:
-	- path_len (int): Length of the path (number of nodes).
-	Changes all the path nodes to PURPLE (color of path).
-	"""
-	path_len = 0 
-	for node in path:
-		path_len += 1 
-		if not node.is_start() and not node.is_end():
-			node.make_path()
-			draw()
-	return path_len
-
 def make_grid(rows, width):
 	"""
 	Function to create a grid for display.

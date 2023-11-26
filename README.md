@@ -81,7 +81,6 @@ algorithms (FOLDER)
 - bfs.py: Code for BFS algorithm.
 - dijkstra.py: Code for Dijkstra algorithm.
 - fringe.py: Code for Fringe algorithm.
-- ripcode.py: Functions that were used temporarily and other implementations that require more work such as the IDA* algorithm.
 
 components (FOLDER)
 - button.py: Contains code for display features such as the buttons and title at the home page.
@@ -104,9 +103,10 @@ tests (FOLDER)
 - fringe_test.py: Test Cases for Fringe Algorithm (only simple tests due to slight error in code)
 - integration.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path)
 
-
 main.py (FILE) --> Run this file to activate the pygame visualizer
 
+CAN IGNORE:
+ripcode.py (FILE): Inventory of functions that were used temporarily and other implementations that require more work such as the IDA* algorithm.
 
 ## Acknowledgements
 

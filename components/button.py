@@ -22,12 +22,14 @@ buttons = {
 INSTRUCTION_BOX_WIDTH = 250
 INSTRUCTION_BOX_HEIGHT = HEIGHT - 3 * BUTTON_MARGIN - 20
 INSTRUCTION_BOX_X = WIDTH - INSTRUCTION_BOX_WIDTH - BUTTON_MARGIN
-INSTRUCTION_BOX_Y = BUTTON_MARGIN + 40
+INSTRUCTION_BOX_Y = BUTTON_MARGIN + 60
 
 instruction_box = pygame.Rect(INSTRUCTION_BOX_X, INSTRUCTION_BOX_Y, INSTRUCTION_BOX_WIDTH, INSTRUCTION_BOX_HEIGHT)
 instruction_font = pygame.font.Font(None, 24)
 instruction_text = (
     "\n"
+	"User Guide: \n"
+	"\n"
 	"Choose an algorithm\n"
 	"\n"
     "1st click is start node\n"
@@ -47,7 +49,7 @@ instruction_text = (
 	"Have fun! :)"
 )
 
-"function to create instruction box at the start of the visualizer"
+#helper function to create instruction box at the start of the visualizer, used in handle_button_events function
 def draw_instruction_box(win):
 
     pygame.draw.rect(win, WHITE, instruction_box, border_radius=20)

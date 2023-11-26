@@ -77,6 +77,6 @@ def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 
 		f_limit = f_min
 
-	path_len = None #nedit
-	path_found = False #nedit
-	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False
+	path_len = None 
+	path_found = False 
+	return path_found, count, path_len 

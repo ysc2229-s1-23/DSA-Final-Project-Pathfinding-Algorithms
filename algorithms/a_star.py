@@ -5,9 +5,9 @@ from components.spot import Spot
 import dill as pickle
 import sys
 
-"-----CODE FOR A* ALGORITHM------"
 sys.setrecursionlimit(100000)
 
+"-----CODE FOR A* ALGORITHM------"
 def h(p1: Spot, p2: Spot): # Manhattan/ taxicab distance
 	"""
 	Helper function to calculate the Manhattan/taxicab distance

@@ -27,7 +27,6 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	priority_queue.put((0, 0, start))
 	count = 0 # entry count to break ties in queue, since Spot objects incomparable
 	came_from = {}
-	# visited = set()
 
 	while priority_queue.qsize() > 0:
 		if test == False:
