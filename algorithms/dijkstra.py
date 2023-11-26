@@ -29,25 +29,33 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	came_from = {}
 	# visited = set()
 
-	while priority_queue:
+	while priority_queue.qsize() > 0:
 		if test == False:
 			for event in pygame.event.get():
 				if event.type == pygame.QUIT:
 					pygame.quit()
 
 		current = priority_queue.get()[2]
-		print(type(current))
+		
 
 		if current == end:
 			path_len = reconstruct_path(came_from, end, draw)
 			end.make_end()
 			start.make_start()
-			path_found = True #nedit
-			print(count, path_len)
-			return path_found, count, path_len #nedit: Original was just --> True
+			path_found = True 
+			return path_found, count, path_len 
 		
+		# print(current.neighbors)
+		# non_closed_neighbors = []
+		# for neighbor in current.neighbors:
+		# 	if not neighbor.is_closed():
+		# 		non_closed_neighbors.append(neighbor)
+		# print("nonclosed")
+		# print(non_closed_neighbors)
 
 		for neighbor in current.neighbors:
+			if neighbor.is_closed():
+				continue
 			distance = distances[current] + 1
 			if distance < distances[neighbor]:
 				came_from[neighbor] = current
@@ -62,7 +70,7 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 		if current != start:
 			current.make_closed()
 
-	path_len = None #nedit
-	path_found = False #nedit
+	path_len = None 
+	path_found = False 
 	
-	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False
+	return path_found, count, path_len 

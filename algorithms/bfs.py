@@ -38,8 +38,8 @@ def bfs_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 			path_len = reconstruct_path(came_from, end, draw)
 			end.make_end()
 			start.make_start()
-			path_found = True #nedit
-			return path_found, count, path_len #nedit: Original was just --> True
+			path_found = True
+			return path_found, count, path_len 
 
 		for neighbor in current.neighbors:
 			if neighbor not in visited:
@@ -54,6 +54,6 @@ def bfs_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 		if current != start:
 			current.make_closed()
 
-	path_len = None #nedit
-	path_found = False #nedit
-	return path_found, count, path_len #none bc no path_len #nedit: Original was just --> False
+	path_len = None 
+	path_found = False 
+	return path_found, count, path_len 
