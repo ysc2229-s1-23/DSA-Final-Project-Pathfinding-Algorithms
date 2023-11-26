@@ -39,10 +39,29 @@ To start the application, simply run `main.py`.
    - Time Complexity: $O(|V| + |E|)$. In the case of a grid where each cell has a constant number of neighbors, the time complexity simplifies to $O(|V|)$.
    - Space Complexity: also $O(|V|)$ due to the queue.
 
-Note: all three of these algorithms are guaranteed to always find the shortest path, and all have the same space complexity. However, there are clear differences in time complexity, and this becomes apparent in the visualisations.
+4. **Fringe Search**: an algorithm which aims to strike a balance between the space/time trade-off of A\* and Iterative Deepening A\* (IDA\*) for pathfinding on grid-based maps. The key motivation is to eliminate problems with repeated states/cycles and reduce the overhead of iterative deepening in IDA\*.
+   The algorithm maintains two lists, "now" and "later," representing the current iteration and the next iteration respectively; this is implemented as a single concatenated list in our code, following the pseudocode provided by the authors of the [paper](https://web.archive.org/web/20090219220415/http://www.cs.ualberta.ca/~games/pathfind/publications/cig2005.pdf) introducing the algorithm.
+   It iterates over the fringe (frontier) of the search tree, expanding nodes based on their costs.
+
+   Compared to A\*, Fringe Search does not require the now list to be kept in sorted order, which may reduce time cost.
+   However, Fringe Search may visit nodes that are irrelevant for the current iteration and A\*’s ordering means that it is more likely to find a goal state sooner than the Fringe Search.
+   The relative costs of these differences determines which of A\* and Fringe Search performs better in specific problems.
+
+Note: the first three of these algorithms are guaranteed to always find the shortest path, and all have the same space complexity. However, there are clear differences in time complexity, and this becomes apparent in the visualisations.
+
+We faced some challenges implementing Fringe Search (and attempting to implement IDA\*), which we will address in the next section.
 
 ## Challenges
+### Visualisation
 Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
+
+### Implementing algorithms
+While our implementation of Dijkstra's, A\* and BFS passed all our tests and managed to find the shortest path every time, we faced challenges implementing both IDA\* and Fringe Search.
+We ended up discarding IDA\* as we did not have time to fix the implementation.
+
+Although the Fringe Search algorithm was generally faster than Dijkstra's or BFS, it often did not find the shortest path (off by 1-10 nodes), and was about as fast as A\* in many cases.
+It is very possible that we misunderstood something in the pseudocode and/or the paper while implementing the algorithm.
+
 
 In your README.md, include:
 
