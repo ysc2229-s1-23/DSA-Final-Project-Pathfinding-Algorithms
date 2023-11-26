@@ -51,15 +51,17 @@ After setting up the nodes in desired fashion and pressing 'SPACE', the algorith
    However, Fringe Search may visit nodes that are irrelevant for the current iteration and A\*’s ordering means that it is more likely to find a goal state sooner than the Fringe Search.
    The relative costs of these differences determines which of A\* and Fringe Search performs better in specific problems.
 
-Note: the first three of these algorithms are guaranteed to always find the shortest path, and all have the same space complexity. However, there are clear differences in time complexity, and this becomes apparent in the visualisations.
+Note: the first three of these algorithms are guaranteed to always find the shortest path, and all have the same space complexity. However, there are clear differences in time complexity, and this becomes apparent in the visualisations and verified in tests.
 
 We faced some challenges implementing Fringe Search (and attempting to implement IDA\*), which we will address in the next section.
 
 ## Challenges
 
 ### Visualisation
-Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
-We also had an issue with a flickering screen when trying to present the pathfinding statistics, which we realized was due to repeatedly updating the grid in the for loops. We solved this issue via ..
+Some challenges we faced include some bugs in clearing the screen which we managed to fix: 
+- parts of the purple path were still there on the screen when we added more barriers after running it once and reran with the spacebar. 
+- pathfinding statistics for previous run lingered even after we changed to a new algorithm and only changed when finding the next new path.
+
 
 ### Implementing algorithms
 While our implementation of Dijkstra's, A\* and BFS passed all our tests and managed to find the shortest path every time, we faced challenges implementing both IDA\* and Fringe Search.
@@ -101,7 +103,7 @@ tests (FOLDER)
 - bfs_test.py: Test Cases for BFS Algorithm using grid examples from hold_val.py.
 - dijkstra_test.py: Test Cases for Dijkstra Algorithm using grid examples from hold_val.py.
 - fringe_test.py: Test Cases for Fringe Algorithm (only simple tests due to slight error in code)
-- integration.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path)
+- integration_test.py: Comparing results across A*, BFS, and Dijkstra Algorithm (shortest path)
 
 main.py (FILE) --> Run this file to activate the pygame visualizer
 
@@ -110,5 +112,5 @@ ripcode.py (FILE): Inventory of functions that were used temporarily and other i
 
 ## Acknowledgements
 
-- Thanks to Prof EJ our DSA professor, and our peer tutors Nihal and Vibilan, for input and guidance.
+- Thanks to Prof EJ, and our peer tutors Nihal and Vibilan, for input and guidance over the course of the semester.
 - Code was adapted from A* Pathfinding Visualization Tutorial by Tech With Tim : https://www.youtube.com/watch?v=JtiK0DOeI4A

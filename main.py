@@ -38,16 +38,15 @@ def main(win, width, rows):
 	algorithm = None # variable for user-selected algorithm
 	selected = False # flag for whether an algorithm has been selected
 	display = False #flag to avoid flickering
-	
+	path_found = None #impt for the pathfinding statistics to not pop off.
 	stat_font = pygame.font.Font(None, 20)
 	present_stat = stat_font.render("", True, BLACK) 
 
 	while run:
-		path_found = None #somehow this is impt for the thing to not pop off....
 		
 		if not display:
 		# if start == None: # first run or cleared
-			win.fill(WHITE) #nedit: is this redundant bc win.fill(WHITE) also in draw function
+			# win.fill(WHITE) 
 			draw(win, grid, rows, width)
 
 		## Button to select the algorithm
@@ -94,6 +93,11 @@ def main(win, width, rows):
 				if event.key == pygame.K_SPACE and start and end:
 					for row in grid:
 						for spot in row:
+							if spot.is_closed() or spot.is_open() or spot.is_path():
+								spot.reset()
+
+					for row in grid:
+						for spot in row:
 							spot.update_neighbors(grid)
 
 					start_time = timer()
@@ -107,11 +111,10 @@ def main(win, width, rows):
 						path_found, count, path_len = bfs_algo(lambda: draw(win, grid, rows, width), grid, start, end)
 					elif algorithm == "Fringe":						
 						path_found, count, path_len = fringe_algo(lambda: draw(win, grid, rows, width), grid, start, end)
-					elif algorithm == "IDA*":						
-						path_found, count, path_len = ida_star_algo(lambda: draw(win, grid, rows, width), grid, start, end)						
 					
 					end_time = timer()
 					traversal_time = end_time - start_time
+					display = True
 
 					if path_found == None:
 						continue
@@ -123,12 +126,13 @@ def main(win, width, rows):
 							stats = "Path not found."
 
 						present_stat = stat_font.render(stats, True, BLACK)
+					
 					## 6. The visualizer must stop once the start and end nodes find each other.
 					## 7. A path must be drawn from the start node to the end node once the visualizer has finished.
 					# these are both handled by code for each algorithm
 
 				## clear the previously found path, while retaining barriers
-				elif event.key == pygame.K_r: # r for 'reset'
+				if event.key == pygame.K_r: # r for 'reset'
 					display = False
 					path_found = None
 			
@@ -139,7 +143,7 @@ def main(win, width, rows):
 					selected = False
 
 				## 5. You must be able to run the visualizer again after it has finished
-				elif event.key == pygame.K_c: # c for 'clear'
+				if event.key == pygame.K_c: # c for 'clear'
 					display = False
 					start = None
 					end = None
@@ -147,10 +151,10 @@ def main(win, width, rows):
 					grid = make_grid(rows, width)
 					selected = False # ensures a different algorithm can be selected
 		
-		if display:
-			place = present_stat.get_rect(center=(WIDTH // 2, 50))
-			WIN.blit(present_stat, place.topleft)
-			pygame.display.update()
+	
+		place = present_stat.get_rect(center=(WIDTH // 2, 50))
+		WIN.blit(present_stat, place.topleft)
+		pygame.display.update()
 
 	pygame.quit()
 

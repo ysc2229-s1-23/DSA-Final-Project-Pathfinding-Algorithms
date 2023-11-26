@@ -28,7 +28,7 @@ instruction_box = pygame.Rect(INSTRUCTION_BOX_X, INSTRUCTION_BOX_Y, INSTRUCTION_
 instruction_font = pygame.font.Font(None, 24)
 instruction_text = (
     "\n"
-	"User Guide: \n"
+	"--------USER GUIDE--------\n"
 	"\n"
 	"Choose an algorithm\n"
 	"\n"
