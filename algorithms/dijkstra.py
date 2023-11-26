@@ -17,6 +17,7 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	- grid (list): A 2D list representing the grid. Each element is an instance of the 'Spot' class.
 	- start (Spot): The starting node to begin pathfinding.
 	- end (Spot): The ending node where the path should end.
+	- test (bool): If function used for testing, test should be True. Otherwise, False.
 	
 	Returns:
 	- path_found (bool): True if a path is found, otherwise False.

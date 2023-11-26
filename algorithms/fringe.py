@@ -2,9 +2,10 @@
 import pygame
 from components.grid import reconstruct_path_fringe
 from algorithms.a_star import h # same heuristic function
+from components.spot import Spot
 
 
-def fringe_algo(draw, grid, start, end):
+def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	"""
 	Function that implements the Fringe algorithm.
 
