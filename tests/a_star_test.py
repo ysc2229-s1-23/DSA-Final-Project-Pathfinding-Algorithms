@@ -4,7 +4,6 @@ from algorithms.a_star import h, a_star_algo
 from components.spot import Spot
 from test_grids.hold_val import no_end, no_grid, no_start, one_end, one_grid, one_start, simple_end, simple_grid, simple_start, simple_end, complex2_end, complex2_grid, complex2_start, complex_end, complex_grid, complex_start
 
-
 @pytest.mark.parametrize("p1, p2, manhattan_dist", [
     (Spot(5, 8, WIDTH, 50), Spot(4, 3, WIDTH, 50), 6),
     (Spot(15, 100, WIDTH, 50),Spot(700, 700, WIDTH, 50), 1285),

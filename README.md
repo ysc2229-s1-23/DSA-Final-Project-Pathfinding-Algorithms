@@ -110,5 +110,5 @@ main.py (FILE) --> Run this file to activate the pygame visualizer
 
 ## Acknowledgements
 
-- Thanks to Prof EJ our DSA professor, and Nihal, our peer tutor, for input and guidance.
+- Thanks to Prof EJ our DSA professor, and our peer tutors Nihal and Vibilan, for input and guidance.
 - Code was adapted from A* Pathfinding Visualization Tutorial by Tech With Tim : https://www.youtube.com/watch?v=JtiK0DOeI4A

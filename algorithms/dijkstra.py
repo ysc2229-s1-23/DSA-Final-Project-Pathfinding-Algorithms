@@ -45,17 +45,7 @@ def dijkstra_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 			path_found = True 
 			return path_found, count, path_len 
 		
-		# print(current.neighbors)
-		# non_closed_neighbors = []
-		# for neighbor in current.neighbors:
-		# 	if not neighbor.is_closed():
-		# 		non_closed_neighbors.append(neighbor)
-		# print("nonclosed")
-		# print(non_closed_neighbors)
-
 		for neighbor in current.neighbors:
-			if neighbor.is_closed():
-				continue
 			distance = distances[current] + 1
 			if distance < distances[neighbor]:
 				came_from[neighbor] = current

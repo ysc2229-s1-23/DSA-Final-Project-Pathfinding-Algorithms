@@ -7,15 +7,16 @@ from test_grids.hold_val import no_end, no_grid, no_start, one_end, one_grid, on
 
 @pytest.mark.parametrize("grid, start, end, path_found, nodes_traversed, path_len", [
     #Edge Case
-    (no_grid, no_start, no_end, False, 0, None),
+     (no_grid, no_start, no_end, False, 0, None),
 
     #One Shortest Path
-    (one_grid, one_start, one_end, True, 16, 16),
+    (one_grid, one_start, one_end, True, 49, 16),
 
     #Other Test Cases
     (simple_grid, simple_start, simple_end, True, 87, 21),
     (complex_grid, complex_start, complex_end, True, 349, 41),
-    (complex2_grid, complex2_start, complex2_end, True, 629, 18)
+    (complex2_grid, complex2_start, complex2_end, True, 629, 18),
+   
 ])
 
 def test_dijkstra_function(grid, start, end, path_found, nodes_traversed, path_len):
