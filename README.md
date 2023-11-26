@@ -52,18 +52,23 @@ Note: the first three of these algorithms are guaranteed to always find the shor
 We faced some challenges implementing Fringe Search (and attempting to implement IDA\*), which we will address in the next section.
 
 ## Challenges
+
 ### Visualisation
 Some challenges we faced include some bugs in clearing the screen, where the purple path was still there.... 
+We also had an issue with a flickering screen when trying to present the pathfinding statistics, which we realized was due to repeatedly updating the grid in the for loops. We solved this issue via ..
 
 ### Implementing algorithms
 While our implementation of Dijkstra's, A\* and BFS passed all our tests and managed to find the shortest path every time, we faced challenges implementing both IDA\* and Fringe Search.
 We ended up discarding IDA\* as we did not have time to fix the implementation.
 
 Although the Fringe Search algorithm was generally faster than Dijkstra's or BFS, it often did not find the shortest path (off by 1-10 nodes), and was about as fast as A\* in many cases.
-It is very possible that we misunderstood something in the pseudocode and/or the paper while implementing the algorithm.
+
+It is very possible that we misunderstood something in the pseudocode and/or the paper while implementing the algorithm. While Fringe Search is still included in the visualizer, finding the shortest path with it is not guaranteed in all cases. 
 
 ### Others
-When experimenting with different features and trying to generate functions, we faced an issue of computer crashing, presumably because of ineffici
+When experimenting with different features and trying to generate functions, we faced an issue of computer crashing, presumably because of computational overload and some personal computer issue. This greatly slowed down our progress in experimenting with code. 
+
+We spent a lot of time debugging code, especially when trying to do the UI and testing, because we had to think about how to separate the pygame elements from the actual algorithm. Definitely a challenging but worthwhile experience!
 
 
 In your README.md, include:
@@ -75,4 +80,3 @@ Instructions on code execution.
 [If applicable] Methodology and findings from the bonus challenge of beating Python’s built-in algorithms.
 
 Any extra information you would like to share with me.
-List the names of all group members, or your own name if you are a solo participant.

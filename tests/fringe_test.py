@@ -6,14 +6,14 @@ import dill as pickle
 
 #SAMPLE GRIDS (contains dictionary of particular grid configuration.)
 # grid with no shortest path:
-with open("nopath", 'rb') as file:
+with open("test_grids/nopath", 'rb') as file:
     db = pickle.load(file)
     no_grid = db["grid"]
     no_start = db["start"]
     no_end = db["end"]
 
 # grid with one shortest path:
-with open("onepath", 'rb') as file:
+with open("test_grids/onepath", 'rb') as file:
     db = pickle.load(file)
     one_grid = db["grid"]
     one_start = db["start"]
@@ -25,6 +25,10 @@ with open("onepath", 'rb') as file:
 ])
 
 def test_fringe_function(grid, start, end, path_found, nodes_traversed, path_len):
+    """
+    Note: for Fringe function, due to some irregularities, we mainly test whether it terminates correctly 
+    and finds a path if there is a viable one.
+    """
     path, count, length = fringe_algo(None, grid, start, end, True)
     assert (path, count, length) == (path_found, nodes_traversed, path_len)
 

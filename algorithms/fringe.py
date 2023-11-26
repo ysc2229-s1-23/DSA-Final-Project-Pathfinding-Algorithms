@@ -75,9 +75,10 @@ def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 	# 	f_limit = f_min
 	# ...
 	while fringe:
-		for event in pygame.event.get():
-			if event.type == pygame.QUIT:
-				pygame.quit()
+		if test == False:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					pygame.quit()
 
 		f_min = float("inf")
 
@@ -96,8 +97,8 @@ def fringe_algo(draw, grid: list, start: Spot, end: Spot, test: bool = False):
 				start.make_start()
 				path_found = True
 				return path_found, count, path_len
-
-			draw()
+			if test == False:
+				draw()
 
 			if node != start:
 				node.make_closed()
